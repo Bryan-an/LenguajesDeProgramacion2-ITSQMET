@@ -21,6 +21,7 @@ public class Equal {
 
             void nextChar() {
                 ch = (++pos < str.length()) ? str.charAt(pos) : -1;
+                System.out.println(ch);
             }
 
             boolean eat(int charToEat) {
