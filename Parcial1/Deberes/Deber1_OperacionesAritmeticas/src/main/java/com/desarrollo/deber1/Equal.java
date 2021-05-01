@@ -17,18 +17,15 @@ public class Equal {
      */
     public static double calculate(final String str) {
         return new Object() {
-            int pos = -1, ch;
+            int position = -1, character;
 
+            //
             void nextChar() {
-                ch = (++pos < str.length()) ? str.charAt(pos) : -1;
-                System.out.println(ch);
+                character = (++position < str.length()) ? str.charAt(position) : -1;
             }
 
             boolean eat(int charToEat) {
-                while (ch == ' ') {
-                    nextChar();
-                }
-                if (ch == charToEat) {
+                if (character == charToEat) {
                     nextChar();
                     return true;
                 }
@@ -38,8 +35,8 @@ public class Equal {
             double parse() {
                 nextChar();
                 double x = parseExpression();
-                if (pos < str.length()) {
-                    throw new RuntimeException("Unexpected: " + (char) ch);
+                if (position < str.length()) {
+                    throw new RuntimeException("Unexpected: " + (char) character);
                 }
                 return x;
             }
@@ -53,7 +50,7 @@ public class Equal {
                 double x = parseTerm();
                 for (;;) {
                     if (eat('+')) {
-                        x += parseTerm(); // addition
+                        x += parseTerm(); // addition                                           
                     } else if (eat('-')) {
                         x -= parseTerm(); // subtraction
                     } else {
@@ -83,34 +80,28 @@ public class Equal {
                     return -parseFactor(); // unary minus
                 }
                 double x;
-                int startPos = this.pos;
+                int startPosition = this.position;
                 if (eat('(')) { // parentheses
                     x = parseExpression();
                     eat(')');
-                } else if ((ch >= '0' && ch <= '9') || ch == '.') { // numbers
-                    while ((ch >= '0' && ch <= '9') || ch == '.') {
+                } else if ((character >= '0' && character <= '9') || character == '.') { // numbers
+                    while ((character >= '0' && character <= '9') || character == '.') {
                         nextChar();
                     }
-                    x = Double.parseDouble(str.substring(startPos, this.pos));
-                } else if (ch >= 'a' && ch <= 'z') { // functions
-                    while (ch >= 'a' && ch <= 'z') {
+                    x = Double.parseDouble(str.substring(startPosition, this.position));
+                } else if (character == '√') { // sqrt
+                    while (character == '√') {
                         nextChar();
                     }
-                    String func = str.substring(startPos, this.pos);
+                    String func = str.substring(startPosition, this.position);
                     x = parseFactor();
-                    if (func.equals("sqrt")) {
+                    if (func.equals("√")) {
                         x = Math.sqrt(x);
-                    } else if (func.equals("sin")) {
-                        x = Math.sin(Math.toRadians(x));
-                    } else if (func.equals("cos")) {
-                        x = Math.cos(Math.toRadians(x));
-                    } else if (func.equals("tan")) {
-                        x = Math.tan(Math.toRadians(x));
                     } else {
                         throw new RuntimeException("Unknown function: " + func);
                     }
                 } else {
-                    throw new RuntimeException("Unexpected: " + (char) ch);
+                    throw new RuntimeException("Unexpected: " + (char) character);
                 }
 
                 if (eat('^')) {
