@@ -17,13 +17,19 @@ public class Equal {
      */
     public static double calculate(final String str) {
         return new Object() {
+            //Variables
             int position = -1, character;
 
-            //
+            /**
+             * Method that moves the position to the next character.
+             */
             void nextChar() {
                 character = (++position < str.length()) ? str.charAt(position) : -1;
             }
 
+            /**
+             * Method that evaluates symbols.
+             */
             boolean eat(int charToEat) {
                 if (character == charToEat) {
                     nextChar();
@@ -32,12 +38,12 @@ public class Equal {
                 return false;
             }
 
+            /**
+             * Method that returns the result.
+             */
             double parse() {
                 nextChar();
                 double x = parseExpression();
-                if (position < str.length()) {
-                    throw new RuntimeException("Unexpected: " + (char) character);
-                }
                 return x;
             }
 
@@ -46,25 +52,31 @@ public class Equal {
             // term = factor | term `*` factor | term `/` factor
             // factor = `+` factor | `-` factor | `(` expression `)`
             //        | number | functionName factor | factor `^` factor
+            /**
+             * Method that performs addition and subtraction.
+             */
             double parseExpression() {
                 double x = parseTerm();
                 for (;;) {
                     if (eat('+')) {
                         x += parseTerm(); // addition                                           
                     } else if (eat('-')) {
-                        x -= parseTerm(); // subtraction
+                        x -= parseTerm(); // subtraction                                                  
                     } else {
                         return x;
                     }
                 }
             }
 
+            /**
+             * Method that performs multiplication and division.
+             */
             double parseTerm() {
                 double x = parseFactor();
                 for (;;) {
-                    if (eat('*')) {
-                        x *= parseFactor(); // multiplication
-                    } else if (eat('/')) {
+                    if (eat('x')) {
+                        x *= parseFactor(); // multiplication                                              
+                    } else if (eat('÷')) {
                         x /= parseFactor(); // division
                     } else {
                         return x;
@@ -72,6 +84,9 @@ public class Equal {
                 }
             }
 
+            /**
+             * Method that evaluates characters.
+             */
             double parseFactor() {
                 if (eat('+')) {
                     return parseFactor(); // unary plus
@@ -81,31 +96,26 @@ public class Equal {
                 }
                 double x;
                 int startPosition = this.position;
-                if (eat('(')) { // parentheses
+                if (eat('(')) { // parentheses                                                                      
                     x = parseExpression();
-                    eat(')');
+                    if (!eat(')')) {
+                        throw new RuntimeException();
+                    }
                 } else if ((character >= '0' && character <= '9') || character == '.') { // numbers
                     while ((character >= '0' && character <= '9') || character == '.') {
                         nextChar();
                     }
                     x = Double.parseDouble(str.substring(startPosition, this.position));
                 } else if (character == '√') { // sqrt
-                    while (character == '√') {
-                        nextChar();
-                    }
-                    String func = str.substring(startPosition, this.position);
+                    nextChar();
                     x = parseFactor();
-                    if (func.equals("√")) {
-                        x = Math.sqrt(x);
-                    } else {
-                        throw new RuntimeException("Unknown function: " + func);
-                    }
+                    x = Math.sqrt(x);
                 } else {
-                    throw new RuntimeException("Unexpected: " + (char) character);
+                    throw new RuntimeException();
                 }
 
                 if (eat('^')) {
-                    x = Math.pow(x, parseFactor()); // exponentiation
+                    x = Math.pow(x, parseFactor()); // exponentiation                                           
                 }
                 return x;
             }
