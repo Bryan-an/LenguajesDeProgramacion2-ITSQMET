@@ -10,6 +10,9 @@ import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.geom.RoundRectangle2D;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
 /**
  *
@@ -18,8 +21,26 @@ import java.awt.geom.RoundRectangle2D;
 public class Calculator extends javax.swing.JFrame {
 
     //Variables
-    private boolean sqrt = false;
+    private boolean sqrt = false, dark = false, exception;
     private Point initialClick;
+    //Dark
+    private Color darkNumbersForeground = new Color(97, 176, 183);
+    private Color darkScreen = new Color(0, 27, 54);
+    private Color darkSymbolsForeground = new Color(38, 205, 220);
+    private Color darkKeyboardTitle = new Color(0, 12, 13);
+    private Color darkAcDelForeground = new Color(204, 98, 63);
+    private ImageIcon darkSymbolsIcon = new ImageIcon("src/main/java/images/darkSymbolsButton.png");
+    private ImageIcon darkRolloverIcon = new ImageIcon("src/main/java/images/darkOver.png");
+    //Light
+    private Color lightScreenForeground = new Color(29, 83, 94);
+    private Color lightForeground = new Color(15, 70, 82);
+    private Color lightScreen = new Color(244, 254, 255);
+    private Color lightKeyboardTitle = new Color(221, 253, 255);
+    private ImageIcon lightSymbolsIcon = new ImageIcon("src/main/java/images/button.png");
+    private ImageIcon lightNumbersIcon = new ImageIcon("src/main/java/images/button3.png");
+    private ImageIcon lightRolloverIcon = new ImageIcon("src/main/java/images/button2.png");
+    private ImageIcon lightAcDelIcon = new ImageIcon("src/main/java/images/buttonAC.png");
+    private ImageIcon lightRolloverAcDelIcon = new ImageIcon("src/main/java/images/buttonAC2.png");
 
     /**
      * Creates new form Calculator
@@ -44,10 +65,10 @@ public class Calculator extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelScreen = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         screen = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelKeyboard = new javax.swing.JPanel();
         btn_leftParentheses = new javax.swing.JButton();
         btn_rightParentheses = new javax.swing.JButton();
         btn_sqrt = new javax.swing.JButton();
@@ -70,7 +91,10 @@ public class Calculator extends javax.swing.JFrame {
         btn_plus = new javax.swing.JButton();
         btn_AC = new javax.swing.JButton();
         btn_DEL = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        jPanelTitleBar = new javax.swing.JPanel();
+        btn_theme = new javax.swing.JButton();
+        btn_close = new javax.swing.JButton();
+        btn_minimize = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -88,7 +112,7 @@ public class Calculator extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(244, 254, 255));
+        jPanelScreen.setBackground(new java.awt.Color(244, 254, 255));
 
         jScrollPane1.setBackground(new java.awt.Color(231, 251, 255));
         jScrollPane1.setBorder(null);
@@ -101,342 +125,456 @@ public class Calculator extends javax.swing.JFrame {
         screen.setOpaque(true);
         jScrollPane1.setViewportView(screen);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelScreenLayout = new javax.swing.GroupLayout(jPanelScreen);
+        jPanelScreen.setLayout(jPanelScreenLayout);
+        jPanelScreenLayout.setHorizontalGroup(
+            jPanelScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelScreenLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        jPanelScreenLayout.setVerticalGroup(
+            jPanelScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelScreenLayout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 350, 90));
+        getContentPane().add(jPanelScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 350, 90));
 
-        jPanel2.setBackground(new java.awt.Color(221, 253, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel2.setLayout(new java.awt.GridLayout(6, 4, 10, 10));
+        jPanelKeyboard.setBackground(new java.awt.Color(221, 253, 255));
+        jPanelKeyboard.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanelKeyboard.setLayout(new java.awt.GridLayout(6, 4, 10, 10));
 
+        btn_leftParentheses.setBackground(new java.awt.Color(221, 253, 255));
         btn_leftParentheses.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_leftParentheses.setForeground(new java.awt.Color(15, 70, 82));
-        btn_leftParentheses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button.png"))); // NOI18N
+        btn_leftParentheses.setIcon(new ImageIcon("src/main/java/images/button.png"));
         btn_leftParentheses.setText("(");
+        btn_leftParentheses.setContentAreaFilled(false);
         btn_leftParentheses.setFocusPainted(false);
         btn_leftParentheses.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_leftParentheses.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button2.png"))); // NOI18N
         btn_leftParentheses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_leftParenthesesActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_leftParentheses);
+        jPanelKeyboard.add(btn_leftParentheses);
 
         btn_rightParentheses.setBackground(new java.awt.Color(77, 212, 242));
         btn_rightParentheses.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_rightParentheses.setForeground(new java.awt.Color(15, 70, 82));
+        btn_rightParentheses.setIcon(new ImageIcon("src/main/java/images/button.png"));
         btn_rightParentheses.setText(")");
+        btn_rightParentheses.setContentAreaFilled(false);
         btn_rightParentheses.setFocusPainted(false);
         btn_rightParentheses.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_rightParentheses.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_rightParentheses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_rightParenthesesActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_rightParentheses);
+        jPanelKeyboard.add(btn_rightParentheses);
 
         btn_sqrt.setBackground(new java.awt.Color(77, 212, 242));
         btn_sqrt.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_sqrt.setForeground(new java.awt.Color(15, 70, 82));
+        btn_sqrt.setIcon(new ImageIcon("src/main/java/images/button.png"));
         btn_sqrt.setText("√");
+        btn_sqrt.setContentAreaFilled(false);
         btn_sqrt.setFocusPainted(false);
         btn_sqrt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_sqrt.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_sqrt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_sqrtActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_sqrt);
+        jPanelKeyboard.add(btn_sqrt);
 
         btn_pow.setBackground(new java.awt.Color(77, 212, 242));
         btn_pow.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_pow.setForeground(new java.awt.Color(15, 70, 82));
+        btn_pow.setIcon(new ImageIcon("src/main/java/images/button.png"));
         btn_pow.setText("^");
+        btn_pow.setContentAreaFilled(false);
         btn_pow.setFocusPainted(false);
         btn_pow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_pow.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_pow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_powActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_pow);
+        jPanelKeyboard.add(btn_pow);
 
         btn_7.setBackground(new java.awt.Color(242, 251, 253));
         btn_7.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_7.setForeground(new java.awt.Color(15, 70, 82));
+        btn_7.setIcon(new ImageIcon("src/main/java/images/button3.png"));
         btn_7.setText("7");
+        btn_7.setContentAreaFilled(false);
         btn_7.setFocusPainted(false);
         btn_7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_7.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_7ActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_7);
+        jPanelKeyboard.add(btn_7);
 
         btn_8.setBackground(new java.awt.Color(242, 251, 253));
         btn_8.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_8.setForeground(new java.awt.Color(15, 70, 82));
+        btn_8.setIcon(new ImageIcon("src/main/java/images/button3.png"));
         btn_8.setText("8");
+        btn_8.setContentAreaFilled(false);
         btn_8.setFocusPainted(false);
         btn_8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_8.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_8ActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_8);
+        jPanelKeyboard.add(btn_8);
 
         btn_9.setBackground(new java.awt.Color(242, 251, 253));
         btn_9.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_9.setForeground(new java.awt.Color(15, 70, 82));
+        btn_9.setIcon(new ImageIcon("src/main/java/images/button3.png"));
         btn_9.setText("9");
+        btn_9.setContentAreaFilled(false);
         btn_9.setFocusPainted(false);
         btn_9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_9.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_9ActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_9);
+        jPanelKeyboard.add(btn_9);
 
         btn_division.setBackground(new java.awt.Color(77, 212, 242));
         btn_division.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_division.setForeground(new java.awt.Color(15, 70, 82));
+        btn_division.setIcon(new ImageIcon("src/main/java/images/button.png"));
         btn_division.setText("÷");
+        btn_division.setContentAreaFilled(false);
         btn_division.setFocusPainted(false);
         btn_division.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_division.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_division.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_divisionActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_division);
+        jPanelKeyboard.add(btn_division);
 
         btn_4.setBackground(new java.awt.Color(242, 251, 253));
         btn_4.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_4.setForeground(new java.awt.Color(15, 70, 82));
+        btn_4.setIcon(new ImageIcon("src/main/java/images/button3.png"));
         btn_4.setText("4");
+        btn_4.setContentAreaFilled(false);
         btn_4.setFocusPainted(false);
         btn_4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_4.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_4ActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_4);
+        jPanelKeyboard.add(btn_4);
 
         btn_5.setBackground(new java.awt.Color(242, 251, 253));
         btn_5.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_5.setForeground(new java.awt.Color(15, 70, 82));
+        btn_5.setIcon(new ImageIcon("src/main/java/images/button3.png"));
         btn_5.setText("5");
+        btn_5.setContentAreaFilled(false);
         btn_5.setFocusPainted(false);
         btn_5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_5.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_5ActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_5);
+        jPanelKeyboard.add(btn_5);
 
         btn_6.setBackground(new java.awt.Color(242, 251, 253));
         btn_6.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_6.setForeground(new java.awt.Color(15, 70, 82));
+        btn_6.setIcon(new ImageIcon("src/main/java/images/button3.png"));
         btn_6.setText("6");
+        btn_6.setContentAreaFilled(false);
         btn_6.setFocusPainted(false);
         btn_6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_6.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_6ActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_6);
+        jPanelKeyboard.add(btn_6);
 
         btn_multiplication.setBackground(new java.awt.Color(77, 212, 242));
         btn_multiplication.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_multiplication.setForeground(new java.awt.Color(15, 70, 82));
+        btn_multiplication.setIcon(new ImageIcon("src/main/java/images/button.png"));
         btn_multiplication.setText("x");
+        btn_multiplication.setContentAreaFilled(false);
         btn_multiplication.setFocusPainted(false);
         btn_multiplication.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_multiplication.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_multiplication.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_multiplicationActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_multiplication);
+        jPanelKeyboard.add(btn_multiplication);
 
         btn_1.setBackground(new java.awt.Color(242, 251, 253));
         btn_1.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_1.setForeground(new java.awt.Color(15, 70, 82));
+        btn_1.setIcon(new ImageIcon("src/main/java/images/button3.png"));
         btn_1.setText("1");
+        btn_1.setContentAreaFilled(false);
         btn_1.setFocusPainted(false);
         btn_1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_1.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_1);
+        jPanelKeyboard.add(btn_1);
 
         btn_2.setBackground(new java.awt.Color(242, 251, 253));
         btn_2.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_2.setForeground(new java.awt.Color(15, 70, 82));
+        btn_2.setIcon(new ImageIcon("src/main/java/images/button3.png"));
         btn_2.setText("2");
+        btn_2.setContentAreaFilled(false);
         btn_2.setFocusPainted(false);
         btn_2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_2.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_2ActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_2);
+        jPanelKeyboard.add(btn_2);
 
         btn_3.setBackground(new java.awt.Color(242, 251, 253));
         btn_3.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_3.setForeground(new java.awt.Color(15, 70, 82));
+        btn_3.setIcon(new ImageIcon("src/main/java/images/button3.png"));
         btn_3.setText("3");
+        btn_3.setContentAreaFilled(false);
         btn_3.setFocusPainted(false);
         btn_3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_3.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_3ActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_3);
+        jPanelKeyboard.add(btn_3);
 
         btn_minus.setBackground(new java.awt.Color(77, 212, 242));
         btn_minus.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_minus.setForeground(new java.awt.Color(15, 70, 82));
+        btn_minus.setIcon(new ImageIcon("src/main/java/images/button.png"));
         btn_minus.setText("-");
+        btn_minus.setContentAreaFilled(false);
         btn_minus.setFocusPainted(false);
         btn_minus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_minus.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_minus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_minusActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_minus);
+        jPanelKeyboard.add(btn_minus);
 
         btn_0.setBackground(new java.awt.Color(242, 251, 253));
         btn_0.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_0.setForeground(new java.awt.Color(15, 70, 82));
+        btn_0.setIcon(new ImageIcon("src/main/java/images/button3.png"));
         btn_0.setText("0");
+        btn_0.setContentAreaFilled(false);
         btn_0.setFocusPainted(false);
         btn_0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_0.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_0ActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_0);
+        jPanelKeyboard.add(btn_0);
 
         btn_dot.setBackground(new java.awt.Color(77, 212, 242));
         btn_dot.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_dot.setForeground(new java.awt.Color(15, 70, 82));
+        btn_dot.setIcon(new ImageIcon("src/main/java/images/button3.png"));
         btn_dot.setText(".");
+        btn_dot.setContentAreaFilled(false);
         btn_dot.setFocusPainted(false);
         btn_dot.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_dot.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_dot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_dotActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_dot);
+        jPanelKeyboard.add(btn_dot);
 
         btn_equal.setBackground(new java.awt.Color(77, 212, 242));
         btn_equal.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_equal.setForeground(new java.awt.Color(15, 70, 82));
+        btn_equal.setIcon(new ImageIcon("src/main/java/images/button.png"));
         btn_equal.setText("=");
+        btn_equal.setContentAreaFilled(false);
         btn_equal.setFocusPainted(false);
         btn_equal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_equal.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_equal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_equalActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_equal);
+        jPanelKeyboard.add(btn_equal);
 
         btn_plus.setBackground(new java.awt.Color(77, 212, 242));
         btn_plus.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_plus.setForeground(new java.awt.Color(15, 70, 82));
+        btn_plus.setIcon(new ImageIcon("src/main/java/images/button.png"));
         btn_plus.setText("+");
+        btn_plus.setContentAreaFilled(false);
         btn_plus.setFocusPainted(false);
         btn_plus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_plus.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_plus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_plusActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_plus);
+        jPanelKeyboard.add(btn_plus);
 
         btn_AC.setBackground(new java.awt.Color(255, 186, 36));
         btn_AC.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         btn_AC.setForeground(new java.awt.Color(15, 70, 82));
+        btn_AC.setIcon(new ImageIcon("src/main/java/images/buttonAC.png"));
         btn_AC.setText("AC");
+        btn_AC.setContentAreaFilled(false);
         btn_AC.setFocusPainted(false);
         btn_AC.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_AC.setRolloverIcon(new ImageIcon("src/main/java/images/buttonAC2.png"));
         btn_AC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ACActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_AC);
+        jPanelKeyboard.add(btn_AC);
 
         btn_DEL.setBackground(new java.awt.Color(255, 186, 36));
         btn_DEL.setFont(new java.awt.Font("Cambria Math", 1, 25)); // NOI18N
         btn_DEL.setForeground(new java.awt.Color(15, 70, 82));
+        btn_DEL.setIcon(new ImageIcon("src/main/java/images/buttonAC.png"));
         btn_DEL.setText("DEL");
+        btn_DEL.setContentAreaFilled(false);
         btn_DEL.setFocusPainted(false);
         btn_DEL.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_DEL.setRolloverIcon(new ImageIcon("src/main/java/images/buttonAC2.png"));
         btn_DEL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_DELActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_DEL);
+        jPanelKeyboard.add(btn_DEL);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 350, 450));
+        getContentPane().add(jPanelKeyboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 350, 450));
 
-        jPanel4.setBackground(new java.awt.Color(221, 253, 255));
-        jPanel4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        jPanelTitleBar.setBackground(new java.awt.Color(221, 253, 255));
+        jPanelTitleBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jPanel4MouseDragged(evt);
+                jPanelTitleBarMouseDragged(evt);
             }
         });
-        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanelTitleBar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel4MousePressed(evt);
+                jPanelTitleBarMousePressed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+        btn_theme.setIcon(new ImageIcon("src/main/java/images/buttonLight-Dark.png"));
+        btn_theme.setBorder(null);
+        btn_theme.setBorderPainted(false);
+        btn_theme.setContentAreaFilled(false);
+        btn_theme.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btn_theme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themeActionPerformed(evt);
+            }
+        });
+
+        btn_close.setFont(new java.awt.Font("Arial Black", 1, 30)); // NOI18N
+        btn_close.setForeground(new java.awt.Color(255, 149, 5));
+        btn_close.setIcon(new ImageIcon("src/main/java/images/close.png"));
+        btn_close.setBorder(null);
+        btn_close.setBorderPainted(false);
+        btn_close.setContentAreaFilled(false);
+        btn_close.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_close.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btn_close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_closeActionPerformed(evt);
+            }
+        });
+
+        btn_minimize.setIcon(new ImageIcon("src/main/java/images/minimize.png"));
+        btn_minimize.setBorder(null);
+        btn_minimize.setBorderPainted(false);
+        btn_minimize.setContentAreaFilled(false);
+        btn_minimize.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_minimize.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btn_minimize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_minimizeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTitleBarLayout = new javax.swing.GroupLayout(jPanelTitleBar);
+        jPanelTitleBar.setLayout(jPanelTitleBarLayout);
+        jPanelTitleBarLayout.setHorizontalGroup(
+            jPanelTitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                .addComponent(btn_theme, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+        jPanelTitleBarLayout.setVerticalGroup(
+            jPanelTitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTitleBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_theme, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 30));
+        getContentPane().add(jPanelTitleBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -525,6 +663,7 @@ public class Calculator extends javax.swing.JFrame {
         } else {
             screen.setForeground(new Color(248, 97, 0));
             screen.setFont(new Font("Cooper Black", Font.BOLD, 25));
+            exception = true;
             try {
                 String result = Equal.calculate(screen.getText()) + "";
                 if (result.equalsIgnoreCase("infinity")) {
@@ -534,9 +673,15 @@ public class Calculator extends javax.swing.JFrame {
                 } else if (result.equalsIgnoreCase("nan")) {
                     screen.setText("Indeterminación");
                 } else {
+                    
                     screen.setFont(new Font("Cambria Math", Font.BOLD, 40));
-                    screen.setForeground(new Color(29, 83, 94));
+                    if (dark) {
+                        screen.setForeground(Color.white);
+                    } else {
+                        screen.setForeground(new Color(29, 83, 94));
+                    }
                     screen.setText(Equal.calculate(screen.getText()) + "");
+                    exception = false;
                 }
             } catch (Exception ex) {
                 screen.setText("¡Error!");
@@ -557,6 +702,7 @@ public class Calculator extends javax.swing.JFrame {
                 || screen.getText().equals("No existe raíz cuadrada de un número negativo")
                 || screen.getText().equals("Indeterminación")) {
             screen.setText("");
+            exception = false;
         } else {
             screen.setText(screen.getText().substring(0, (screen.getText().length() - 1)));
         }
@@ -564,14 +710,15 @@ public class Calculator extends javax.swing.JFrame {
 
     private void btn_ACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ACActionPerformed
         screen.setText("");
+        exception = false;
     }//GEN-LAST:event_btn_ACActionPerformed
 
-    private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
+    private void jPanelTitleBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelTitleBarMousePressed
         initialClick = evt.getPoint();
         getComponentAt(initialClick);
-    }//GEN-LAST:event_jPanel4MousePressed
+    }//GEN-LAST:event_jPanelTitleBarMousePressed
 
-    private void jPanel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseDragged
+    private void jPanelTitleBarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelTitleBarMouseDragged
         // get location of Window
         int thisX = getLocation().x;
         int thisY = getLocation().y;
@@ -584,16 +731,111 @@ public class Calculator extends javax.swing.JFrame {
         int X = thisX + xMoved;
         int Y = thisY + yMoved;
         setLocation(X, Y);
-    }//GEN-LAST:event_jPanel4MouseDragged
+    }//GEN-LAST:event_jPanelTitleBarMouseDragged
+
+    private void btn_themeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themeActionPerformed
+        
+        if (dark) {
+            //Panels
+            jPanelScreen.setBackground(lightScreen);
+            jPanelTitleBar.setBackground(lightKeyboardTitle);
+            jPanelKeyboard.setBackground(lightKeyboardTitle);
+            //Labels
+            screen.setBackground(lightScreen);
+            if (!exception) {
+                screen.setForeground(lightScreenForeground);
+            }
+            //Buttons
+            lightNumbersButtons(btn_0);
+            lightNumbersButtons(btn_1);
+            lightNumbersButtons(btn_2);
+            lightNumbersButtons(btn_3);
+            lightNumbersButtons(btn_4);
+            lightNumbersButtons(btn_5);
+            lightNumbersButtons(btn_6);
+            lightNumbersButtons(btn_7);
+            lightNumbersButtons(btn_8);
+            lightNumbersButtons(btn_9);
+            lightNumbersButtons(btn_dot);
+            lightSymbolsButtons(btn_leftParentheses);
+            lightSymbolsButtons(btn_rightParentheses);
+            lightSymbolsButtons(btn_sqrt);
+            lightSymbolsButtons(btn_pow);
+            lightSymbolsButtons(btn_division);
+            lightSymbolsButtons(btn_multiplication);
+            lightSymbolsButtons(btn_minus);
+            lightSymbolsButtons(btn_plus);
+            lightSymbolsButtons(btn_equal);
+            btn_AC.setIcon(lightAcDelIcon);
+            btn_AC.setRolloverIcon(lightRolloverAcDelIcon);
+            btn_AC.setForeground(lightForeground);
+            btn_DEL.setIcon(lightAcDelIcon);
+            btn_DEL.setRolloverIcon(lightRolloverAcDelIcon);
+            btn_DEL.setForeground(lightForeground);
+            btn_theme.setIcon(new ImageIcon("src/main/java/images/buttonLight-Dark.png"));
+            
+            dark = false;
+        } else {
+            //Panels
+            jPanelScreen.setBackground(darkScreen);
+            jPanelTitleBar.setBackground(darkKeyboardTitle);
+            jPanelKeyboard.setBackground(darkKeyboardTitle);
+            //Labels
+            screen.setBackground(darkScreen);
+            if (!exception) {
+                screen.setForeground(Color.white);
+            }
+            //Buttons
+            darkNumbersButtons(btn_0);
+            darkNumbersButtons(btn_1);
+            darkNumbersButtons(btn_2);
+            darkNumbersButtons(btn_3);
+            darkNumbersButtons(btn_4);
+            darkNumbersButtons(btn_5);
+            darkNumbersButtons(btn_6);
+            darkNumbersButtons(btn_7);
+            darkNumbersButtons(btn_8);
+            darkNumbersButtons(btn_9);
+            darkNumbersButtons(btn_dot);
+            darkSymbolsButtons(btn_leftParentheses);
+            darkSymbolsButtons(btn_rightParentheses);
+            darkSymbolsButtons(btn_sqrt);
+            darkSymbolsButtons(btn_pow);
+            darkSymbolsButtons(btn_division);
+            darkSymbolsButtons(btn_multiplication);
+            darkSymbolsButtons(btn_minus);
+            darkSymbolsButtons(btn_plus);
+            darkSymbolsButtons(btn_equal);
+            btn_AC.setIcon(null);
+            btn_AC.setForeground(darkAcDelForeground);
+            btn_DEL.setIcon(null);
+            btn_DEL.setForeground(darkAcDelForeground);
+            btn_theme.setIcon(new ImageIcon("src/main/java/images/buttonDark-Light.png"));
+            
+            dark = true;
+        }
+    }//GEN-LAST:event_btn_themeActionPerformed
+
+    private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_closeActionPerformed
+
+    private void btn_minimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_minimizeActionPerformed
+        this.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_btn_minimizeActionPerformed
 
     /**
      * Method that write the sysmbols and numbers.
      *
      * @param buttonValue Button value.
      */
-    private void write(String buttonValue) {
+    public void write(String buttonValue) {
         screen.setFont(new Font("Cambria Math", Font.BOLD, 40));
-        screen.setForeground(new Color(29, 83, 94));
+        if (dark) {
+            screen.setForeground(Color.white);
+        } else {
+            screen.setForeground(new Color(29, 83, 94));
+        }
         if (screen.getText().isEmpty()
                 || screen.getText().equals("¡Error!")
                 || screen.getText().equals("¡Bienvenid@!")
@@ -601,9 +843,34 @@ public class Calculator extends javax.swing.JFrame {
                 || screen.getText().equals("No existe raíz cuadrada de un número negativo")
                 || screen.getText().equals("Indeterminación")) {
             screen.setText(buttonValue);
+            exception = false;
         } else {
             screen.setText(screen.getText() + buttonValue);
         }
+    }
+    
+    public void lightNumbersButtons(JButton numberButton) {
+        numberButton.setIcon(lightNumbersIcon);
+        numberButton.setRolloverIcon(lightRolloverIcon);
+        numberButton.setForeground(lightForeground);
+    }
+    
+    public void lightSymbolsButtons(JButton symbolButton) {
+        symbolButton.setIcon(lightSymbolsIcon);
+        symbolButton.setRolloverIcon(lightRolloverIcon);
+        symbolButton.setForeground(lightForeground);
+    }
+    
+    public void darkNumbersButtons(JButton numberButton) {
+        numberButton.setIcon(null);
+        numberButton.setRolloverIcon(darkRolloverIcon);
+        numberButton.setForeground(darkNumbersForeground);
+    }
+    
+    public void darkSymbolsButtons(JButton symbolButton) {
+        symbolButton.setIcon(darkSymbolsIcon);
+        symbolButton.setRolloverIcon(darkRolloverIcon);
+        symbolButton.setForeground(darkSymbolsForeground);
     }
 
     /**
@@ -654,20 +921,23 @@ public class Calculator extends javax.swing.JFrame {
     private javax.swing.JButton btn_9;
     private javax.swing.JButton btn_AC;
     private javax.swing.JButton btn_DEL;
+    private javax.swing.JButton btn_close;
     private javax.swing.JButton btn_division;
     private javax.swing.JButton btn_dot;
     private javax.swing.JButton btn_equal;
     private javax.swing.JButton btn_leftParentheses;
+    private javax.swing.JButton btn_minimize;
     private javax.swing.JButton btn_minus;
     private javax.swing.JButton btn_multiplication;
     private javax.swing.JButton btn_plus;
     private javax.swing.JButton btn_pow;
     private javax.swing.JButton btn_rightParentheses;
     private javax.swing.JButton btn_sqrt;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton btn_theme;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelKeyboard;
+    private javax.swing.JPanel jPanelScreen;
+    private javax.swing.JPanel jPanelTitleBar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel screen;
     // End of variables declaration//GEN-END:variables

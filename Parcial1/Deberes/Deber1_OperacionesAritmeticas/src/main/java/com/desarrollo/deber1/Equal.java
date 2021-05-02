@@ -44,6 +44,9 @@ public class Equal {
             double parse() {
                 nextChar();
                 double x = parseExpression();
+                if (position < str.length()) {
+                    throw new RuntimeException();
+                }
                 return x;
             }
 
