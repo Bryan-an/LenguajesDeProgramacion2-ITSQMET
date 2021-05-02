@@ -66,7 +66,7 @@ public class Calculator extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jPanelScreen = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPaneScreen = new javax.swing.JScrollPane();
         screen = new javax.swing.JLabel();
         jPanelKeyboard = new javax.swing.JPanel();
         btn_leftParentheses = new javax.swing.JButton();
@@ -114,8 +114,8 @@ public class Calculator extends javax.swing.JFrame {
 
         jPanelScreen.setBackground(new java.awt.Color(244, 254, 255));
 
-        jScrollPane1.setBackground(new java.awt.Color(231, 251, 255));
-        jScrollPane1.setBorder(null);
+        jScrollPaneScreen.setBackground(new java.awt.Color(231, 251, 255));
+        jScrollPaneScreen.setBorder(null);
 
         screen.setBackground(new java.awt.Color(244, 254, 255));
         screen.setFont(new java.awt.Font("Cambria Math", 1, 40)); // NOI18N
@@ -123,7 +123,7 @@ public class Calculator extends javax.swing.JFrame {
         screen.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         screen.setText("¡Bienvenid@!");
         screen.setOpaque(true);
-        jScrollPane1.setViewportView(screen);
+        jScrollPaneScreen.setViewportView(screen);
 
         javax.swing.GroupLayout jPanelScreenLayout = new javax.swing.GroupLayout(jPanelScreen);
         jPanelScreen.setLayout(jPanelScreenLayout);
@@ -131,14 +131,14 @@ public class Calculator extends javax.swing.JFrame {
             jPanelScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelScreenLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPaneScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanelScreenLayout.setVerticalGroup(
             jPanelScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelScreenLayout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPaneScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -673,7 +673,7 @@ public class Calculator extends javax.swing.JFrame {
                 } else if (result.equalsIgnoreCase("nan")) {
                     screen.setText("Indeterminación");
                 } else {
-                    
+
                     screen.setFont(new Font("Cambria Math", Font.BOLD, 40));
                     if (dark) {
                         screen.setForeground(Color.white);
@@ -734,7 +734,7 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelTitleBarMouseDragged
 
     private void btn_themeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themeActionPerformed
-        
+
         if (dark) {
             //Panels
             jPanelScreen.setBackground(lightScreen);
@@ -773,7 +773,7 @@ public class Calculator extends javax.swing.JFrame {
             btn_DEL.setRolloverIcon(lightRolloverAcDelIcon);
             btn_DEL.setForeground(lightForeground);
             btn_theme.setIcon(new ImageIcon("src/main/java/images/buttonLight-Dark.png"));
-            
+
             dark = false;
         } else {
             //Panels
@@ -811,7 +811,7 @@ public class Calculator extends javax.swing.JFrame {
             btn_DEL.setIcon(null);
             btn_DEL.setForeground(darkAcDelForeground);
             btn_theme.setIcon(new ImageIcon("src/main/java/images/buttonDark-Light.png"));
-            
+
             dark = true;
         }
     }//GEN-LAST:event_btn_themeActionPerformed
@@ -848,25 +848,45 @@ public class Calculator extends javax.swing.JFrame {
             screen.setText(screen.getText() + buttonValue);
         }
     }
-    
+
+    /**
+     * Method that sets the light theme for numbers.
+     *
+     * @param numberButton
+     */
     public void lightNumbersButtons(JButton numberButton) {
         numberButton.setIcon(lightNumbersIcon);
         numberButton.setRolloverIcon(lightRolloverIcon);
         numberButton.setForeground(lightForeground);
     }
-    
+
+    /**
+     * Method that sets the light theme for symbols.
+     *
+     * @param symbolButton Symbol button.
+     */
     public void lightSymbolsButtons(JButton symbolButton) {
         symbolButton.setIcon(lightSymbolsIcon);
         symbolButton.setRolloverIcon(lightRolloverIcon);
         symbolButton.setForeground(lightForeground);
     }
-    
+
+    /**
+     * Method that sets the dark theme for numbers.
+     *
+     * @param numberButton Number Button.
+     */
     public void darkNumbersButtons(JButton numberButton) {
         numberButton.setIcon(null);
         numberButton.setRolloverIcon(darkRolloverIcon);
         numberButton.setForeground(darkNumbersForeground);
     }
-    
+
+    /**
+     * Method that sets the dark theme for symbols.
+     *
+     * @param symbolButton Symbol buthon.
+     */
     public void darkSymbolsButtons(JButton symbolButton) {
         symbolButton.setIcon(darkSymbolsIcon);
         symbolButton.setRolloverIcon(darkRolloverIcon);
@@ -938,7 +958,7 @@ public class Calculator extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelKeyboard;
     private javax.swing.JPanel jPanelScreen;
     private javax.swing.JPanel jPanelTitleBar;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPaneScreen;
     private javax.swing.JLabel screen;
     // End of variables declaration//GEN-END:variables
 }
