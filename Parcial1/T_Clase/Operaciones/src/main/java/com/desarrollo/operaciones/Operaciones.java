@@ -38,4 +38,28 @@ public class Operaciones {
         resultado = Math.pow(base, exponente);
         System.out.println("La potencia es: " + resultado);
     }
+
+    //División
+    public void division(double num1, double num2) {
+        if (num1 == 0 && num2 == 0) {
+            System.out.println("INDETERMINACIÓN");
+        } else if (num2 == 0) {
+            System.out.println("NO EXISTE DIVISIÓN PARA CERO");
+        } else {
+            resultado = num1 / num2;
+            System.out.println("La división es: " + resultado);
+        }
+    }
+
+    //Multiplicación
+    public void multiplicacion(double num1, double num2) {
+        resultado = num1 * num2;
+        System.out.println("La multiplicación es: " + resultado);
+    }
+
+    //Raíz cuadrada
+    public void sqrt(double num1) {
+        resultado = Math.sqrt(num1);
+        System.out.println("La raíz cuadrada es: " + resultado);
+    }
 }

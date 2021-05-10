@@ -64,7 +64,6 @@ public class Calculator extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
         jPanelScreen = new javax.swing.JPanel();
         jScrollPaneScreen = new javax.swing.JScrollPane();
         screen = new javax.swing.JLabel();
@@ -95,17 +94,6 @@ public class Calculator extends javax.swing.JFrame {
         btn_theme = new javax.swing.JButton();
         btn_close = new javax.swing.JButton();
         btn_minimize = new javax.swing.JButton();
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -715,7 +703,7 @@ public class Calculator extends javax.swing.JFrame {
 
     private void jPanelTitleBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelTitleBarMousePressed
         initialClick = evt.getPoint();
-        getComponentAt(initialClick);
+        //getComponentAt(initialClick);
     }//GEN-LAST:event_jPanelTitleBarMousePressed
 
     private void jPanelTitleBarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelTitleBarMouseDragged
@@ -817,11 +805,11 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_themeActionPerformed
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void btn_minimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_minimizeActionPerformed
-        this.setState(JFrame.ICONIFIED);
+        this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btn_minimizeActionPerformed
 
     /**
@@ -909,23 +897,23 @@ public class Calculator extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
+        //</editor-fold>
+
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Calculator().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Calculator().setVisible(true);
         });
+        
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Calculator().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -954,7 +942,6 @@ public class Calculator extends javax.swing.JFrame {
     private javax.swing.JButton btn_rightParentheses;
     private javax.swing.JButton btn_sqrt;
     private javax.swing.JButton btn_theme;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelKeyboard;
     private javax.swing.JPanel jPanelScreen;
     private javax.swing.JPanel jPanelTitleBar;
