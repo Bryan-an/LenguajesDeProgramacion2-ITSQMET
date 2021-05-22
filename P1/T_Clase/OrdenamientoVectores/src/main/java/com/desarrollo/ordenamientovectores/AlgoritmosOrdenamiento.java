@@ -48,9 +48,7 @@ public class AlgoritmosOrdenamiento {
 
             do {
 
-                apuntador = 0;
-
-                do {
+                for (apuntador = 0; apuntador < numeroSublistas; apuntador++) {
                     longitudSublista = 0;
                     for (int i = apuntador; i < longitudVector; i += numeroSublistas) {
                         longitudSublista++;
@@ -67,9 +65,7 @@ public class AlgoritmosOrdenamiento {
                     for (int i = apuntador; i < longitudVector; i += numeroSublistas) {
                         vector[i] = sublista[j++];
                     }
-                    apuntador++;
-
-                } while (apuntador < numeroSublistas);
+                }
 
                 n *= 2;
                 numeroSublistas = (longitudVector / n);
