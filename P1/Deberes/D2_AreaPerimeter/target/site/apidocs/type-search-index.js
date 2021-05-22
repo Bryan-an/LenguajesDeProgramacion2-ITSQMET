@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"com.desarrollo.d2_areaperimeter","l":"Area"},{"p":"com.desarrollo.d2_areaperimeter","l":"Main"},{"p":"com.desarrollo.d2_areaperimeter","l":"Perimeter"}];updateSearchResults();
