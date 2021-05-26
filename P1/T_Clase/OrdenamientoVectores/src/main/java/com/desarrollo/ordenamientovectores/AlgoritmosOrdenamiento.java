@@ -43,24 +43,24 @@ public class AlgoritmosOrdenamiento {
     public void metodoShell(int[] vector) {
         if (vector.length != 1) {
 
-            int longitudVector = vector.length, n = 2, numeroSublistas = (longitudVector / n), longitudSublista = 0, j, apuntador;
-            int[] sublista;
+            int longitudVector = vector.length, n = 2, numeroSublistas = (longitudVector / n), longitudSublista = 1, j, apuntador;
+            int[] sublista = new int[longitudSublista];
 
             do {
 
                 for (apuntador = 0; apuntador < numeroSublistas; apuntador++) {
-                    longitudSublista = 0;
-                    for (int i = apuntador; i < longitudVector; i += numeroSublistas) {
-                        longitudSublista++;
-                    }
-                    sublista = new int[longitudSublista];
-
+                    longitudSublista = 1;
                     j = 0;
                     for (int i = apuntador; i < longitudVector; i += numeroSublistas) {
+                        if (j == longitudSublista) {
+                            int[] aux = new int[longitudSublista];
+                            System.arraycopy(sublista, 0, aux, 0, longitudSublista++);
+                            sublista = new int[longitudSublista];
+                            System.arraycopy(aux, 0, sublista, 0, longitudSublista - 1);
+                        }
                         sublista[j++] = vector[i];
                     }
                     sublista = ordenarSublista(sublista);
-
                     j = 0;
                     for (int i = apuntador; i < longitudVector; i += numeroSublistas) {
                         vector[i] = sublista[j++];
@@ -90,8 +90,7 @@ public class AlgoritmosOrdenamiento {
             j = i - 1;
 
             while ((j >= 0) && (clave < sublista[j])) {
-                sublista[j + 1] = sublista[j];
-                j--;
+                sublista[j + 1] = sublista[j--];
             }
 
             sublista[j + 1] = clave;
