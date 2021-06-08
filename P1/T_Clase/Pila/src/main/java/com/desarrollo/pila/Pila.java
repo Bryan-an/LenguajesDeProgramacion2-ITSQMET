@@ -15,8 +15,6 @@ public class Pila {
     //Crear un objeto
     Stack<Integer> pila = new Stack();
 
-    ;
-
     //métodos
     //int -> Integer
     //double -> Double

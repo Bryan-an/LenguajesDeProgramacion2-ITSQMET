@@ -28,6 +28,7 @@ public final class ClaseEjecutablePila {
 
     public void mostrarMenu() {
         int numeroOpcion;
+
         do {
             System.out.println("\n-------------Pilas_Matutino-------------"
                     + "\n1. Agregar un elemento a la pila"
