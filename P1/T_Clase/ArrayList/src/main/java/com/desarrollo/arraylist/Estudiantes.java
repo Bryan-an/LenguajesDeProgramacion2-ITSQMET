@@ -58,8 +58,6 @@ public class Estudiantes {
     public void invertir() {
         ArrayList<String> coleccionInvertida = new ArrayList<String>();
 
-        coleccionInvertida.clear();
-
         for (int i = nombres.size() - 1; i >= 0; i--) {
             coleccionInvertida.add(nombres.get(i));
         }

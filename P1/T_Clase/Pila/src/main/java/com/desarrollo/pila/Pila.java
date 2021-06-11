@@ -47,8 +47,6 @@ public class Pila {
 //            System.out.println(elemento);
 //        }
         System.out.println("Pila:");
-        pila.forEach(elemento -> {
-            System.out.println(elemento);
-        });
+        pila.forEach(System.out::println);
     }
 }

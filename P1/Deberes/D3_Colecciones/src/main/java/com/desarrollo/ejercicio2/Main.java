@@ -65,7 +65,8 @@ public final class Main {
      * Method that prints the collection's size.
      */
     public void printSize() {
-        System.out.println("\nLa cantidad de números ingresados es: " + decimals.size());
+        System.out.println("\nLa cantidad de números ingresados es: "
+                + decimals.size());
     }
 
     /**
@@ -74,7 +75,8 @@ public final class Main {
     public void printAverage() {
         double average = 0;
 
-        average = decimals.stream().map(decimal -> decimal).reduce(average, (accumulator, _item) -> accumulator + _item);
+        average = decimals.stream().map(decimal -> decimal).reduce(average,
+                (accumulator, _item) -> accumulator + _item);
         System.out.println("\nEl promedio es: " + average / decimals.size());
     }
 }

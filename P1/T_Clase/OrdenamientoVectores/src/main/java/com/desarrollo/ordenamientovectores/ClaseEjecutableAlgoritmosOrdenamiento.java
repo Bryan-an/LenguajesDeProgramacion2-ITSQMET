@@ -61,8 +61,7 @@ public class ClaseEjecutableAlgoritmosOrdenamiento {
                     System.out.println("Opción inválida");
             }
         } while (op != 5);
-//        int[] vectorPrueba = {15, 33, 27, 10, 35, 19, 42, 44};
-//        algoritmo.metodoShell(vectorPrueba);
+
     }
 
 }

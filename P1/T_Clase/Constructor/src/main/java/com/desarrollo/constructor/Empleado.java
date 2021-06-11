@@ -27,7 +27,9 @@ public class Empleado {
     //Métodos
     @Override
     public String toString() {
-        return "\nInformación Empleado:\nNombre: " + nombre + "\nCódigo: " + codigo + "\nHoras trabajadas: " + horasT + "\nValor por hora: " + valorH;
+        return "\nInformación Empleado:\nNombre: " + nombre + "\nCódigo: "
+                + codigo + "\nHoras trabajadas: " + horasT + "\nValor por hora: "
+                + valorH;
     }
 
     public void calcularSueldo() {
