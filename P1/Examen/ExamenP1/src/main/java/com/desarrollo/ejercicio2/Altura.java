@@ -8,6 +8,7 @@ import java.util.ArrayList;
 /**
  *
  * @author bryan
+ * @param <E>
  */
 public class Altura<E> extends ArrayList<E> {
 
