@@ -21,13 +21,11 @@ public class Altura {
     }
 
     public void promedioAlturas() {
-        double acumAlturas = 0;
+        promedio = alturas.stream()
+                .mapToDouble(altura -> altura)
+                .average()
+                .getAsDouble();
 
-        for (double altura : alturas) {
-            acumAlturas += altura;
-        }
-
-        promedio = acumAlturas / alturas.size();
         System.out.println("Pormedio es: " + String.format("%.2f", promedio));
     }
 
@@ -59,9 +57,7 @@ public class Altura {
         System.out.println("Alturas ordenadas:");
         Collections.sort(alturasClonadas);
 
-        for (Double alturasClonada : alturasClonadas) {
-            System.out.println(alturasClonada);
-        }
+        alturasClonadas.forEach(System.out::println);
     }
 
     public void alturaMayorMenor() {
@@ -70,8 +66,6 @@ public class Altura {
 
     public void imprimirAlturas() {
         System.out.println("\nAlturas");
-        for (double altura : alturas) {
-            System.out.println(altura);
-        }
+        alturas.forEach(System.out::println);
     }
 }
