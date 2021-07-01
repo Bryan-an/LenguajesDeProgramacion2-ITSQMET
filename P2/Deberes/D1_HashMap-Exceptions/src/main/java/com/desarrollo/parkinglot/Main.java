@@ -13,7 +13,7 @@ import java.util.Scanner;
 public final class Main {
 
     //Fields
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
     private final ParkingLot parkingLot = new ParkingLot();
 
     /**
@@ -38,8 +38,14 @@ public final class Main {
     public void showMenu() {
         System.out.println("----------------Parqueadero--------------");
         int optionNumber;
+
         do {
-            optionNumber = askOption();
+            System.out.println("\n1. Mostrar espacios vacios"
+                    + "\n2. Agregar vehículo al parqueadero"
+                    + "\n3. Retirar vehículo del parqueadero"
+                    + "\n4. Salir"
+                    + "\n\nEscoja una opción:");
+            optionNumber = askForOptionNumber();
             performOperations(optionNumber);
         } while (optionNumber != 4);
     }
@@ -69,25 +75,20 @@ public final class Main {
      *
      * @return A valid option number.
      */
-    public int askOption() {
+    public int askForOptionNumber() {
         int optionNumber = 0;
-        boolean valid;
+        boolean isValid = false;
 
         do {
-            valid = true;
+
             try {
-                System.out.println("\n1. Mostrar espacios vacios"
-                        + "\n2. Agregar vehículo al parqueadero"
-                        + "\n3. Retirar vehículo del parqueadero"
-                        + "\n4. Salir"
-                        + "\n\nEscoja una opción:");
-                optionNumber = sc.nextInt();
+                optionNumber = input.nextInt();
+                isValid = true;
             } catch (Exception e) {
-                sc.nextLine();
+                input.nextLine();
                 System.out.println("\nDato inválido");
-                valid = false;
             }
-        } while (!valid);
+        } while (!isValid);
 
         return optionNumber;
     }

@@ -15,7 +15,7 @@ public class ParkingLot {
 
     //Fields
     private final HashMap<Integer, String> spaces;
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
 
     /**
      * Constructor of ParkingLot class.
@@ -57,15 +57,17 @@ public class ParkingLot {
      */
     public void addCar() {
         if (areThereAvailableSpaces()) {
-            int space = askSpace("\nIngrese el número de espacio en donde desea parquear su vehículo:");
+            int spaceNumber = askForSpaceNumber("\nIngrese el número de espacio en donde desea parquear su vehículo:");
 
-            if (spaces.get(space) == null) {
-                String licensePlate = askLicensePlate();
-                spaces.put(space, licensePlate);
+            if (spaces.get(spaceNumber) == null) {
+                String licensePlate = askForLicensePlate();
+                spaces.put(spaceNumber, licensePlate);
             } else {
                 System.out.println("\nDicho espacio ya se encuentra ocupado");
             }
 
+        } else {
+            System.out.println("\nNo hay espacios disponibles en el parqueadero");
         }
 
     }
@@ -74,11 +76,11 @@ public class ParkingLot {
      * Method that removes a car.
      */
     public void removeCar() {
-        int space = askSpace("\nIngrese el número de espacio en donde parqueó su vehículo:");
-        if (spaces.get(space) == null) {
+        int spaceNumber = askForSpaceNumber("\nIngrese el número de espacio en donde parqueó su vehículo:");
+        if (spaces.get(spaceNumber) == null) {
             System.out.println("\nDicho espacio está vació");
         } else {
-            spaces.put(space, null);
+            spaces.put(spaceNumber, null);
             System.out.println("\nSe ha retirado el vehículo correctamente");
         }
     }
@@ -86,30 +88,30 @@ public class ParkingLot {
     /**
      * Method that asks for the space number.
      *
-     * @param order Ther order message.
+     * @param request Ther order message.
      * @return A valid space number.
      */
-    public int askSpace(String order) {
-        int space = 0;
-        boolean valid;
+    public int askForSpaceNumber(String request) {
+        int spaceNumber = 0;
+        boolean isValid = false;
 
         do {
-            valid = true;
             try {
-                System.out.println(order);
-                space = sc.nextInt();
-                if (!(space >= 1 && space <= 10)) {
+                System.out.println(request);
+                spaceNumber = input.nextInt();
+
+                if (spaceNumber >= 1 && spaceNumber <= 10) {
+                    isValid = true;
+                } else {
                     System.out.println("\nEl espacio ingresado no existe");
-                    valid = false;
                 }
             } catch (Exception e) {
-                sc.nextLine();
+                input.nextLine();
                 System.out.println("\nDato inválido");
-                valid = false;
             }
-        } while (!valid);
+        } while (!isValid);
 
-        return space;
+        return spaceNumber;
     }
 
     /**
@@ -117,42 +119,43 @@ public class ParkingLot {
      *
      * @return A valid license plate.
      */
-    public String askLicensePlate() {
+    public String askForLicensePlate() {
         String licensePlate = null;
         char[] licensePlateArray;
-        boolean valid;
+        boolean isValid;
 
         do {
-            valid = true;
 
             try {
                 System.out.println("\nIngrese el número de placa de su vehículo");
-                licensePlate = sc.next().toUpperCase();
+                licensePlate = input.next().toUpperCase();
 
-                if (!(licensePlate.length() == 6 || licensePlate.length() == 7)) {
-                    throw new InvalidLicensePlate();
-                } else {
+                if (licensePlate.length() == 6 || licensePlate.length() == 7) {
                     licensePlateArray = licensePlate.toLowerCase().toCharArray();
 
                     for (int i = 0; i <= 2; i++) {
-                        if (licensePlateArray[i] >= '0'
-                                && licensePlateArray[i] <= '9') {
+                        if (!((licensePlateArray[i] >= 'a'
+                                && licensePlateArray[i] <= 'z')
+                                || licensePlateArray[i] == 'ñ')) {
                             throw new InvalidLicensePlate();
                         }
                     }
 
                     for (int i = 3; i < licensePlateArray.length; i++) {
-                        if ((licensePlateArray[i] >= 'a'
-                                && licensePlateArray[i] <= 'z')
-                                || licensePlateArray[i] == 'ñ') {
+                        if (!(licensePlateArray[i] >= '0'
+                                && licensePlateArray[i] <= '9')) {
                             throw new InvalidLicensePlate();
                         }
                     }
+                } else {
+                    throw new InvalidLicensePlate();
                 }
+
+                isValid = true;
             } catch (InvalidLicensePlate e) {
-                valid = false;
+                isValid = false;
             }
-        } while (!valid);
+        } while (!isValid);
 
         return licensePlate;
     }
