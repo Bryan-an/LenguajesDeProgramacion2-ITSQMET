@@ -130,6 +130,11 @@ public class ParkingLot {
                 System.out.println("\nIngrese el número de placa de su vehículo");
                 licensePlate = input.next().toUpperCase();
 
+                if (spaces.containsValue(licensePlate)) {
+                    System.out.println("\nDicho vehículo ya se encuentra en el parquedero");
+                    throw new InvalidLicensePlate();
+                }
+
                 if (licensePlate.length() == 6 || licensePlate.length() == 7) {
                     licensePlateArray = licensePlate.toLowerCase().toCharArray();
 
