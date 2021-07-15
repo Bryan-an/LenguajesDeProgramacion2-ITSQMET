@@ -3,14 +3,10 @@
  */
 package com.desarrollo.ventana;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 
 /**
  *
@@ -20,6 +16,7 @@ public class Ventana extends JFrame {
 
     //Campos
     JPanel panel = new JPanel();
+    Ventana2 ventana2 = new Ventana2();
 
     //Constructor
     public Ventana() {
@@ -57,6 +54,7 @@ public class Ventana extends JFrame {
         getContentPane().add(panel);
         //método etiqueta
         etiquetas();
+        botones();
     }
 
     public void etiquetas() {
@@ -86,4 +84,34 @@ public class Ventana extends JFrame {
         panel.add(etiquetaImagen);
     }
 
+    //botones
+    public void botones() {
+        JButton boton = new JButton();
+        boton.setText("Ingresar");
+        boton.setBounds(300, 400, 100, 30);
+        boton.setForeground(Color.RED);
+        //boton.setEnabled(false); //desabilitar el botón
+        boton.setFont(new Font("Calibri", Font.BOLD, 15));
+        //Acción - evento
+//        boton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                ventana2.setVisible(true);
+//            }
+//        });
+        boton.addActionListener(e -> {
+            ventana2.setVisible(true);
+            dispose();  //cierra la ventana 1
+        });
+
+        panel.add(boton);
+
+        JButton botonImagen = new JButton();
+        botonImagen.setBounds(100, 400, 140, 30); //x, y, ancho, alto
+        ImageIcon imagen = new ImageIcon("iconoherramienta.jpg");
+        botonImagen.setIcon(new ImageIcon(imagen.getImage()
+                .getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        botonImagen.setText("Configuración");
+        panel.add(botonImagen);
+    }
 }
