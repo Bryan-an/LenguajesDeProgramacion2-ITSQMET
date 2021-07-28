@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  *
  * @author Bryan Andagoya
  */
-public class Parqueadero {
+public final class Parqueadero {
 
     HashMap<Integer, String> parqueadero = new HashMap<Integer, String>();
 
@@ -53,10 +53,15 @@ public class Parqueadero {
 
     public void removerVehiculo(String placa) {
         if (parqueadero.containsValue(placa)) {
-            parqueadero.entrySet()
-                    .stream()
-                    .filter(entry -> entry.getValue().equals(placa))
-                    .forEach(entry -> parqueadero.replace(entry.getKey(), placa));
+            parqueadero.forEach((k, v) -> {
+                if (v.equals(placa)) {
+                    parqueadero.replace(k, placa);
+                }
+            });
+//            parqueadero.entrySet()
+//                    .stream()
+//                    .filter(entry -> entry.getValue().equals(placa))
+//                    .forEach(entry -> parqueadero.replace(entry.getKey(), placa));
 
             System.out.println("Vehículo retirado");
 
@@ -71,7 +76,7 @@ public class Parqueadero {
 
     public void removerVehiculo(int espacio) {
         if (parqueadero.containsKey(espacio)) {
-            parqueadero.put(espacio, "");
+            parqueadero.replace(espacio, "");
         } else {
             System.out.println("");
         }
@@ -82,9 +87,14 @@ public class Parqueadero {
         System.out.println("Espacios disponibles");
         System.out.println("Espacio \t Vehículo");
 
-        for (Map.Entry<Integer, String> espacio : parqueadero.entrySet()) {
-            System.out.println("  " + espacio.getKey() + "\t\t"
-                    + espacio.getValue());
-        }
+        parqueadero.forEach((k, v) -> {
+            if (v.equals("")) {
+                System.out.println("  " + k + "\t\t" + v);
+            }
+        });
+//        for (Map.Entry<Integer, String> espacio : parqueadero.entrySet()) {
+//            System.out.println("  " + espacio.getKey() + "\t\t"
+//                    + espacio.getValue());
+//        }
     }
 }

@@ -10,8 +10,9 @@ import javax.swing.*;
  *
  * @author Bryan Andagoya
  */
-public class Ventana2 extends JFrame {
+public final class Ventana2 extends JFrame {
 
+    //Fields
     JPanel panel = new JPanel();
 
     //constructor
@@ -44,7 +45,7 @@ public class Ventana2 extends JFrame {
         panel.add(op1);
 
         JRadioButton op2 = new JRadioButton("Opción 1");
-        op1.setBounds(50, 150, 100, 50);
+        op2.setBounds(50, 150, 100, 50);
         panel.add(op2);
 
         //Permite agrupar los radioButtons

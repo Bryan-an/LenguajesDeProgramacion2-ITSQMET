@@ -12,8 +12,8 @@ import javax.swing.*;
  *
  * @author Bryan Andagoya
  */
-public class Operacion extends JFrame {
-    
+public final class Operacion extends JFrame {
+
     JPanel panel;
     JButton botonSuma;
     JLabel num1;
@@ -30,7 +30,7 @@ public class Operacion extends JFrame {
         setResizable(false);
         iniciarComponentes();
     }
-    
+
     public void iniciarComponentes() {
         panel();
         etiquetas();
@@ -38,13 +38,13 @@ public class Operacion extends JFrame {
         botonSuma();
         resultado();
     }
-    
+
     public void panel() {
         panel = new JPanel();
         panel.setLayout(null);
         this.add(panel); //añadir el panel al JFrame
     }
-    
+
     public void etiquetas() {
         JLabel titulo = new JLabel();
         titulo.setText("Operación Suma");
@@ -57,34 +57,34 @@ public class Operacion extends JFrame {
         //etiquetas números
         num1 = new JLabel();
         num1.setText("Número 1");
-        num1.setBounds(30, 60, 200, 30);
+        num1.setBounds(30, 60, 60, 30);
         num1.setFont(new Font("Calibri", Font.BOLD, 12));
         panel.add(num1);
-        
+
         num2 = new JLabel();
         num2.setText("Número 2");
-        num2.setBounds(30, 95, 200, 30);
+        num2.setBounds(30, 95, 60, 30);
         num2.setFont(new Font("Calibri", Font.BOLD, 12));
         panel.add(num2);
     }
-    
+
     public void camposTexto() {
         campoNum1 = new JTextField();
         campoNum1.setBounds(90, 63, 150, 20);
         panel.add(campoNum1);
-        
+
         campoNum2 = new JTextField();
         campoNum2.setBounds(90, 98, 150, 20);
         panel.add(campoNum2);
     }
-    
+
     public void botonSuma() {
         botonSuma = new JButton();
         botonSuma.setText("Sumar");
         botonSuma.setBounds(93, 140, 100, 25);
         panel.add(botonSuma);
     }
-    
+
     public void resultado() {
         JTextField resultado = new JTextField();
         resultado.setBounds(75, 190, 140, 25);
@@ -107,7 +107,7 @@ public class Operacion extends JFrame {
                 resultado.setText(resultadoSuma + "");
             }
         };
-        
+
         botonSuma.addActionListener(suma);
     }
 }

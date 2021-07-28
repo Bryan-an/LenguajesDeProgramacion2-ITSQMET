@@ -3,7 +3,7 @@
  */
 package com.desarrollo.parqueadero;
 
-import java.util.Scanner;
+import java.io.*;
 
 /**
  *
@@ -13,16 +13,20 @@ public class ClaseEjecutableParqueadero {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int op;
         int espacio;
         String placa;
-        Scanner sc = new Scanner(System.in);
+        BufferedReader input
+                = new BufferedReader(new InputStreamReader(System.in));
+
         Parqueadero parqueadero = new Parqueadero();
-        
+
         System.out.println("");
         System.out.println("Parqueadero ITSQMET");
+
         do {
             System.out.println("1. Mostrar espacios disponibles");
             System.out.println("2. Agregar vehículo");
@@ -30,26 +34,27 @@ public class ClaseEjecutableParqueadero {
             System.out.println("4. Retirar Vehícula-Placa");
             System.out.println("5. Salir");
             System.out.println("Escoja una opción:");
-            op = sc.nextInt();
+            op = Integer.parseInt(input.readLine());
+
             switch (op) {
                 case 1:
                     parqueadero.mostrarEspacios();
                     break;
                 case 2:
                     System.out.println("Espacio: ");
-                    espacio = sc.nextInt();
+                    espacio = Integer.parseInt(input.readLine());
                     System.out.println("Placa vehículo:");
-                    placa = sc.next();
+                    placa = input.readLine();
                     parqueadero.agregarVehiculo(espacio, placa);
                     break;
                 case 3:
                     System.out.println("Espacio: ");
-                    espacio = sc.nextInt();
+                    espacio = Integer.parseInt(input.readLine());
                     parqueadero.removerVehiculo(espacio);
                     break;
                 case 4:
                     System.out.println("Placa vehículo:");
-                    placa = sc.next();
+                    placa = input.readLine();
                     parqueadero.removerVehiculo(placa);
                     break;
                 case 5:
@@ -60,5 +65,5 @@ public class ClaseEjecutableParqueadero {
             }
         } while (op != 5);
     }
-    
+
 }

@@ -4,15 +4,13 @@
 package com.desarrollo.ventana;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
  *
  * @author Bryan Andagoya
  */
-public class Ventana extends JFrame {
+public final class Ventana extends JFrame {
 
     //Campos
     JPanel panel = new JPanel();

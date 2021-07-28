@@ -146,6 +146,7 @@ public class Calculator extends javax.swing.JFrame {
         btn_leftParentheses.setContentAreaFilled(false);
         btn_leftParentheses.setFocusPainted(false);
         btn_leftParentheses.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_leftParentheses.setRolloverIcon(new ImageIcon("src/main/java/images/button2.png"));
         btn_leftParentheses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_leftParenthesesActionPerformed(evt);

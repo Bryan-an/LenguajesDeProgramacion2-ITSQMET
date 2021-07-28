@@ -1,11 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Corrección del examen P1
  */
 package com.desarrollo.tickets;
 
-import java.util.Scanner;
+import java.io.*;
 
 /**
  *
@@ -15,11 +13,15 @@ public class ClaseEjecutableTickets {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int op;
         Tickets tickets = new Tickets();
-        Scanner sc = new Scanner(System.in);
+        BufferedReader input
+                = new BufferedReader(new InputStreamReader(System.in));
+//        Scanner sc = new Scanner(System.in);
+
         do {
             System.out.println("Menú");
             System.out.println("1. Repartir Tickets");
@@ -29,7 +31,7 @@ public class ClaseEjecutableTickets {
             System.out.println("5. Cantidad tickets inválidos");
             System.out.println("6. Salir");
             System.out.println("Escoja una opción:");
-            op = sc.nextInt();
+            op = Integer.parseInt(input.readLine());
 
             switch (op) {
                 case 1:

@@ -42,25 +42,25 @@ public class Tickets {
 
         colaTickets.clear();
         String[] tickets = acumTickets.split(",");
-        for (int i = 0; i < tickets.length; i++) {
-            colaTickets.add(tickets[i]);
-        }
+        colaTickets.addAll(Arrays.asList(tickets));
     }
 
     public void ticketsValidos() {
         System.out.println("");
         System.out.println("Tickets válidos");
-        for (int i = 0; i < colaTickets.size(); i++) {
-            System.out.println(colaTickets.get(i));
-        }
+//        for (int i = 0; i < colaTickets.size(); i++) {
+//            System.out.println(colaTickets.get(i));
+//        }
+        colaTickets.forEach(System.out::println);
     }
 
     public void ticketsInvalidos() {
         System.out.println("");
         System.out.println("Tickets inválidos");
-        for (int i = 0; i < colaTicketsInvalidos.size(); i++) {
-            System.out.println(colaTicketsInvalidos.get(i));
-        }
+//        for (int i = 0; i < colaTicketsInvalidos.size(); i++) {
+//            System.out.println(colaTicketsInvalidos.get(i));
+//        }
+        colaTicketsInvalidos.forEach(System.out::println);
     }
 
     public int contTicketsValidos() {

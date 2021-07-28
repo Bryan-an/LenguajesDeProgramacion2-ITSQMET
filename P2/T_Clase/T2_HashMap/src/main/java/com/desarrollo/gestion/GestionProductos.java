@@ -4,7 +4,6 @@
 package com.desarrollo.gestion;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -26,7 +25,7 @@ public class GestionProductos {
 
     public void modificarNombre(String codigo, String nombre) {
         if (listaProductos.containsKey(codigo)) {
-            listaProductos.put(codigo, nombre);
+            listaProductos.replace(codigo, nombre);
             System.out.println("Se modificó correctamente el producto");
         } else {
             System.out.println("No existe ningún producto con ese código");
@@ -73,9 +72,10 @@ public class GestionProductos {
         listaProductos.values().forEach(System.out::println);
 
         System.out.println("\nCódigo\t    Nombre");
-        for (Map.Entry<String, String> elemento : listaProductos.entrySet()) {
-            System.out.println(elemento.getKey() + "\t    " + elemento.getValue());
-        }
+        listaProductos.forEach((k, v) -> System.out.println(k + "\t    " + v));
+//        for (Map.Entry<String, String> elemento : listaProductos.entrySet()) {
+//            System.out.println(elemento.getKey() + "\t    " + elemento.getValue());
+//        }
 
     }
 }

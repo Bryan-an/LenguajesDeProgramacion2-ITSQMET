@@ -16,11 +16,13 @@ public class ClaseEjecutableVentana {
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
+//            new Ventana().setVisible(true);
+
             //instanciar la clase
             Ventana ventana = new Ventana();
             //ventana visible
             ventana.setVisible(true);
         });
     }
-
+    
 }

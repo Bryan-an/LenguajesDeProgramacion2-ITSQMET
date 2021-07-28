@@ -1,11 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * HaspMap
  */
 package com.desarrollo.gestion;
 
-import java.util.Scanner;
+import java.io.*;
 
 /**
  *
@@ -16,9 +14,11 @@ public class ClaseEjecutableProductos {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        BufferedReader input
+                = new BufferedReader(new InputStreamReader(System.in));
+
         int op;
-        Scanner sc = new Scanner(System.in);
         String codigo, nombre;
 
         System.out.println("Bienvenido a la tienda Marthita");
@@ -33,44 +33,41 @@ public class ClaseEjecutableProductos {
             System.out.println("6. Mostrar productos");
             System.out.println("7. Salir");
             System.out.println("Escoja una opción:");
-            op = sc.nextInt();
+            op = Integer.parseInt(input.readLine());
 
             switch (op) {
                 case 1:
                     System.out.println("Información producto");
                     System.out.println("Código:");
-                    codigo = sc.next();
+                    codigo = input.readLine();
                     System.out.println("Nombre:");
-                    sc.skip("\n");
-                    nombre = sc.nextLine();
+                    nombre = input.readLine();
                     productos.guardarProducto(codigo, nombre);
                     break;
                 case 2:
                     System.out.println("Modificar producto");
                     System.out.println("Código del producto a modificar:");
-                    codigo = sc.next();
+                    codigo = input.readLine();
                     System.out.println("Nuevo nombre del producto:");
-                    sc.skip("\n");
-                    nombre = sc.nextLine();
+                    nombre = input.readLine();
                     productos.modificarNombre(codigo, nombre);
                     break;
                 case 3:
                     System.out.println("Eliminar producto");
                     System.out.println("Código del producto a eliminar:");
-                    codigo = sc.next();
+                    codigo = input.readLine();
                     productos.eliminar(codigo);
                     break;
                 case 4:
                     System.out.println("Buscar por código");
                     System.out.println("Código:");
-                    codigo = sc.next();
+                    codigo = input.readLine();
                     productos.buscarCodigo(codigo);
                     break;
                 case 5:
                     System.out.println("Buscar por nombre");
                     System.out.println("Nombre:");
-                    sc.skip("\n");
-                    nombre = sc.nextLine();
+                    nombre = input.readLine();
                     productos.buscarNombre(nombre);
                     break;
                 case 6:
