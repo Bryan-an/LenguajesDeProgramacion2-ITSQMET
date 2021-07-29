@@ -1,34 +1,42 @@
 /**
  * Deber 3 Lenguajes de programación 2 - Calculadora división.
  */
-package com.desarrollo.examen;
+package com.desarrollo.ejercicio1;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+import java.io.File;
+import java.io.IOException;
+import java.text.DecimalFormat;
 import javax.swing.*;
 
 /**
  *
  * @author bryan
  */
-public class Interfaz extends javax.swing.JFrame {
+public final class Relsb extends javax.swing.JFrame {
 
     //Variables
     private Point initialClick;
-    private boolean dark = false;
+    private Font titleFont;
+    private Font CooperBlack;
 
     /**
      * Creates new form Calculator
      */
-    public Interfaz() {
+    public Relsb() {
+        createFonts();
         initComponents();
         setLocationRelativeTo(null);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/images/icon.png"));
+        setIconImage(new ImageIcon("src/main/java/com/desarrollo/images/icon.png")
+                .getImage());
+
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20));
+                setShape(new RoundRectangle2D.Double(0, 0, getWidth(),
+                        getHeight(), 20, 20));
             }
         });
     }
@@ -42,115 +50,165 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelTitleBar = new javax.swing.JPanel();
-        btn_theme = new javax.swing.JButton();
+        titleBarPanel = new javax.swing.JPanel();
         btn_close = new javax.swing.JButton();
         btn_minimize = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        lbl_title = new javax.swing.JLabel();
+        mainPanel = new javax.swing.JPanel();
+        lbl_itsqmetLogo = new javax.swing.JLabel();
+        lbl_brand = new javax.swing.JLabel();
+        cbx_brand = new javax.swing.JComboBox<>();
+        lbl_price = new javax.swing.JLabel();
+        txt_price = new javax.swing.JTextField();
+        lbl_amount = new javax.swing.JLabel();
+        spn_amount = new javax.swing.JSpinner();
+        btn_total = new javax.swing.JButton();
+        lbl_total = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(245, 245, 245));
         setUndecorated(true);
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanelTitleBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        titleBarPanel.setBackground(new java.awt.Color(245, 245, 245));
+        titleBarPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jPanelTitleBarMouseDragged(evt);
+                titleBarPanelMouseDragged(evt);
             }
         });
-        jPanelTitleBar.addMouseListener(new java.awt.event.MouseAdapter() {
+        titleBarPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanelTitleBarMousePressed(evt);
-            }
-        });
-
-        btn_theme.setIcon(new ImageIcon("src/main/java/images/buttonLight-Dark.png"));
-        btn_theme.setBorder(null);
-        btn_theme.setBorderPainted(false);
-        btn_theme.setContentAreaFilled(false);
-        btn_theme.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btn_theme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_themeActionPerformed(evt);
+                titleBarPanelMousePressed(evt);
             }
         });
 
         btn_close.setFont(new java.awt.Font("Arial Black", 1, 30)); // NOI18N
         btn_close.setForeground(new java.awt.Color(255, 149, 5));
-        btn_close.setIcon(new ImageIcon("src/main/java/images/close.png"));
+        btn_close.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/close.png"));
         btn_close.setBorder(null);
         btn_close.setBorderPainted(false);
         btn_close.setContentAreaFilled(false);
         btn_close.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_close.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btn_close.setRolloverIcon(new ImageIcon("src/main/java/images/closeRollover.png"));
+        btn_close.setRolloverIcon(new ImageIcon("src/main/java/com/desarrollo/images/closeRollover.png"));
         btn_close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_closeActionPerformed(evt);
             }
         });
 
-        btn_minimize.setIcon(new ImageIcon("src/main/java/images/minimize.png"));
+        btn_minimize.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/minimize.png"));
         btn_minimize.setBorder(null);
         btn_minimize.setBorderPainted(false);
         btn_minimize.setContentAreaFilled(false);
         btn_minimize.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_minimize.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btn_minimize.setRolloverIcon(new ImageIcon("src/main/java/images/minimizeRollover.png"));
+        btn_minimize.setRolloverIcon(new ImageIcon("src/main/java/com/desarrollo/images/minimizeRollover.png"));
         btn_minimize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_minimizeActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanelTitleBarLayout = new javax.swing.GroupLayout(jPanelTitleBar);
-        jPanelTitleBar.setLayout(jPanelTitleBarLayout);
-        jPanelTitleBarLayout.setHorizontalGroup(
-            jPanelTitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleBarLayout.createSequentialGroup()
+        lbl_title.setFont(titleFont);
+        lbl_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_title.setText("Examen Segundo Parcial");
+
+        javax.swing.GroupLayout titleBarPanelLayout = new javax.swing.GroupLayout(titleBarPanel);
+        titleBarPanel.setLayout(titleBarPanelLayout);
+        titleBarPanelLayout.setHorizontalGroup(
+            titleBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titleBarPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 572, Short.MAX_VALUE)
-                .addComponent(btn_theme, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(52, 52, 52))
+        );
+        titleBarPanelLayout.setVerticalGroup(
+            titleBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(titleBarPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(titleBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(9, Short.MAX_VALUE))
+            .addGroup(titleBarPanelLayout.createSequentialGroup()
+                .addComponent(lbl_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanelTitleBarLayout.setVerticalGroup(
-            jPanelTitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTitleBarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelTitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_theme, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
-        getContentPane().add(jPanelTitleBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 30));
+        mainPanel.setBackground(new java.awt.Color(245, 245, 245));
+        mainPanel.setPreferredSize(new java.awt.Dimension(665, 440));
+        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 660, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
+        lbl_itsqmetLogo.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/ITSQMET_logo.png"));
+        mainPanel.add(lbl_itsqmetLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 0, 250, 77));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 660, 440));
+        lbl_brand.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_brand.setText("Marca:");
+        mainPanel.add(lbl_brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, 30));
+
+        cbx_brand.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adidas", "Nike", "Vans", "Otras marcas" }));
+        mainPanel.add(cbx_brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 160, 30));
+
+        lbl_price.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_price.setText("Precio:        $");
+        mainPanel.add(lbl_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, 30));
+
+        txt_price.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_priceActionPerformed(evt);
+            }
+        });
+        mainPanel.add(txt_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 160, 30));
+
+        lbl_amount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_amount.setText("Cantidad:");
+        mainPanel.add(lbl_amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, -1, 30));
+
+        spn_amount.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        mainPanel.add(spn_amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 90, 30));
+
+        btn_total.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_total.setText("Calcular Total");
+        btn_total.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_totalActionPerformed(evt);
+            }
+        });
+        mainPanel.add(btn_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, -1, -1));
+
+        lbl_total.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_total.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mainPanel.add(lbl_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 158, 42));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+            .addComponent(titleBarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(titleBarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanelTitleBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelTitleBarMousePressed
+    private void titleBarPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titleBarPanelMousePressed
         initialClick = evt.getPoint();
         //getComponentAt(initialClick);
-    }//GEN-LAST:event_jPanelTitleBarMousePressed
+    }//GEN-LAST:event_titleBarPanelMousePressed
 
-    private void jPanelTitleBarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelTitleBarMouseDragged
+    private void titleBarPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titleBarPanelMouseDragged
         // get location of Window
         int thisX = getLocation().x;
         int thisY = getLocation().y;
@@ -163,17 +221,7 @@ public class Interfaz extends javax.swing.JFrame {
         int X = thisX + xMoved;
         int Y = thisY + yMoved;
         setLocation(X, Y);
-    }//GEN-LAST:event_jPanelTitleBarMouseDragged
-
-    private void btn_themeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themeActionPerformed
-        if (dark) {
-            btn_theme.setIcon(new ImageIcon("src/main/java/images/buttonLight-Dark.png"));
-            dark = false;
-        } else {
-            btn_theme.setIcon(new ImageIcon("src/main/java/images/buttonDark-Light.png"));
-            dark = true;
-        }
-    }//GEN-LAST:event_btn_themeActionPerformed
+    }//GEN-LAST:event_titleBarPanelMouseDragged
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
         System.exit(0);
@@ -182,6 +230,64 @@ public class Interfaz extends javax.swing.JFrame {
     private void btn_minimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_minimizeActionPerformed
         this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btn_minimizeActionPerformed
+
+    private void txt_priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_priceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_priceActionPerformed
+
+    private void btn_totalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_totalActionPerformed
+        DecimalFormat formatter = new DecimalFormat("0.00");
+        String brand = (String) cbx_brand.getSelectedItem();
+        double price;
+        int amount = (int) spn_amount.getValue();
+        double total = 0;
+
+        try {
+            if (txt_price.getText().matches("\\d+\\.*\\d{0,2}")) {
+                price = Double.parseDouble(txt_price.getText());
+
+                switch (brand) {
+                    case "Adidas":
+                        total = (price * amount) * 0.95;
+                        break;
+                    case "Nike":
+                        total = (price * amount) * 0.92;
+                        break;
+                    case "Vans":
+                        total = (price * amount) * 0.90;
+                        break;
+                    case "Otras marcas":
+                        total = (price * amount) * 0.98;
+                        break;
+                }
+
+                lbl_total.setText("Total: $ " + formatter.format(total));
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Precio inválido", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Precio inválido", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_btn_totalActionPerformed
+
+    public void createFonts() {
+
+        try {
+            CooperBlack = Font.createFont(Font.TRUETYPE_FONT,
+                    new File("src/main/java/com/desarrollo/fonts/COOPBL.TTF"));
+            titleFont = CooperBlack.deriveFont(Font.BOLD, 20);
+            GraphicsEnvironment ge
+                    = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(titleFont);
+        } catch (FontFormatException | IOException ex) {
+            System.out.println("Font error");
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -192,6 +298,7 @@ public class Interfaz extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -200,16 +307,16 @@ public class Interfaz extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Relsb.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
 
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Interfaz().setVisible(true);
+            new Relsb().setVisible(true);
         });
 
 //        java.awt.EventQueue.invokeLater(new Runnable() {
@@ -222,8 +329,17 @@ public class Interfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_close;
     private javax.swing.JButton btn_minimize;
-    private javax.swing.JButton btn_theme;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanelTitleBar;
+    private javax.swing.JButton btn_total;
+    private javax.swing.JComboBox<String> cbx_brand;
+    private javax.swing.JLabel lbl_amount;
+    private javax.swing.JLabel lbl_brand;
+    private javax.swing.JLabel lbl_itsqmetLogo;
+    private javax.swing.JLabel lbl_price;
+    private javax.swing.JLabel lbl_title;
+    private javax.swing.JLabel lbl_total;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JSpinner spn_amount;
+    private javax.swing.JPanel titleBarPanel;
+    private javax.swing.JTextField txt_price;
     // End of variables declaration//GEN-END:variables
 }

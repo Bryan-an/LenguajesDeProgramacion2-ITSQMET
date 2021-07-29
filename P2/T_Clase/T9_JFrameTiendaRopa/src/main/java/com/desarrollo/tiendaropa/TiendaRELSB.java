@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Bryan Andagoya
  */
-public class TiendaRELSB extends javax.swing.JFrame {
+public final class TiendaRELSB extends javax.swing.JFrame {
 
     //Clase que permite la gestión del JTable
     DefaultTableModel model = new DefaultTableModel();
@@ -336,6 +336,11 @@ public class TiendaRELSB extends javax.swing.JFrame {
         jBtnLimpiar.setBackground(new java.awt.Color(153, 102, 255));
         jBtnLimpiar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jBtnLimpiar.setText("LIMPIAR COMPRA");
+        jBtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnLimpiarActionPerformed(evt);
+            }
+        });
 
         jBtnValorNetoPagar.setBackground(new java.awt.Color(153, 102, 255));
         jBtnValorNetoPagar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -458,6 +463,10 @@ public class TiendaRELSB extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRBtnMujerActionPerformed
 
+    private void jBtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLimpiarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnLimpiarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -486,10 +495,8 @@ public class TiendaRELSB extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TiendaRELSB().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TiendaRELSB().setVisible(true);
         });
     }
 
