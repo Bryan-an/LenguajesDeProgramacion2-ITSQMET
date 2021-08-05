@@ -616,8 +616,8 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="52" green="46" red="f" type="rgb"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new ImageIcon(&quot;src/main/java/com/desarrollo/images/button3.png&quot;)" type="code"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="0" name="null"/>
             </Property>
             <Property name="text" type="java.lang.String" value="0"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
@@ -853,7 +853,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txt_screen" pref="344" max="32767" attributes="0"/>
+                          <Component id="txt_mainScreen" pref="344" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="txt_secondScreen" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -867,14 +867,14 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="txt_secondScreen" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="txt_screen" min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="txt_mainScreen" min="-2" pref="48" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="txt_screen">
+            <Component class="javax.swing.JTextField" name="txt_mainScreen">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -904,7 +904,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_screenActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_mainScreenActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_secondScreen">

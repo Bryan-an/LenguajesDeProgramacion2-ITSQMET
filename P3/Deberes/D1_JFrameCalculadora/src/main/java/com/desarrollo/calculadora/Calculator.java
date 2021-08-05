@@ -18,35 +18,28 @@ public final class Calculator extends javax.swing.JFrame {
 
     //Variables
     private Double[] operands = {null, null};
-    private final DecimalFormat formatter = new DecimalFormat("###,###.####################");
-    private final ArrayList<JButton> lockableButtons = new ArrayList<JButton>();
+    private final DecimalFormat mainScreenFormatter = new DecimalFormat("###,###.####################");
+    private final DecimalFormat secondScreenFormatter = new DecimalFormat("#.####################");
+    private final ArrayList<JButton> symbolButtons = new ArrayList<JButton>();
+    private final ArrayList<JButton> numberButtons = new ArrayList<JButton>();
 
     private Point initialClick;
     private String operator = null;
-    private boolean overwrite = true;
-    private boolean equalPressed = false;
-    private double result;
+    private boolean overwriteMainScreen = true;
+    private boolean equalClicked = false;
+    private Double result = null;
     private boolean firstTime = true;
     private boolean indeterminacy = false;
     private boolean divisionBy0 = false;
-
     private Double equalResult;
+    private boolean overwriteSecondScreen = false;
 
     /**
      * Creates new form Calculadora
      */
     public Calculator() {
         initComponents();
-        setLocationRelativeTo(null);
-        fillLockableButtonsList();
-        enableButtons(false);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/com/desarrollo/images/icon.png"));
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20));
-            }
-        });
+        configureWindow();
     }
 
     /**
@@ -82,7 +75,7 @@ public final class Calculator extends javax.swing.JFrame {
         btn_close = new javax.swing.JButton();
         btn_minimize = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        txt_screen = new javax.swing.JTextField();
+        txt_mainScreen = new javax.swing.JTextField();
         txt_secondScreen = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -367,7 +360,7 @@ public final class Calculator extends javax.swing.JFrame {
         btn_0.setBackground(new java.awt.Color(234, 254, 255));
         btn_0.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_0.setForeground(new java.awt.Color(15, 70, 82));
-        btn_0.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
+        btn_0.setIcon(null);
         btn_0.setText("0");
         btn_0.setContentAreaFilled(false);
         btn_0.setFocusPainted(false);
@@ -497,19 +490,19 @@ public final class Calculator extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(244, 254, 255));
 
-        txt_screen.setEditable(false);
-        txt_screen.setBackground(new java.awt.Color(244, 254, 255));
-        txt_screen.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
-        txt_screen.setForeground(new java.awt.Color(35, 116, 140));
-        txt_screen.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txt_screen.setText("0");
-        txt_screen.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 15));
-        txt_screen.setMaximumSize(new java.awt.Dimension(244, 48));
-        txt_screen.setMinimumSize(new java.awt.Dimension(244, 48));
-        txt_screen.setPreferredSize(new java.awt.Dimension(244, 48));
-        txt_screen.addActionListener(new java.awt.event.ActionListener() {
+        txt_mainScreen.setEditable(false);
+        txt_mainScreen.setBackground(new java.awt.Color(244, 254, 255));
+        txt_mainScreen.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
+        txt_mainScreen.setForeground(new java.awt.Color(35, 116, 140));
+        txt_mainScreen.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_mainScreen.setText("0");
+        txt_mainScreen.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 15));
+        txt_mainScreen.setMaximumSize(new java.awt.Dimension(244, 48));
+        txt_mainScreen.setMinimumSize(new java.awt.Dimension(244, 48));
+        txt_mainScreen.setPreferredSize(new java.awt.Dimension(244, 48));
+        txt_mainScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_screenActionPerformed(evt);
+                txt_mainScreenActionPerformed(evt);
             }
         });
 
@@ -527,7 +520,7 @@ public final class Calculator extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_screen, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                    .addComponent(txt_mainScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txt_secondScreen)
                         .addContainerGap())))
@@ -537,7 +530,7 @@ public final class Calculator extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(txt_secondScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txt_screen, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_mainScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -557,9 +550,9 @@ public final class Calculator extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_screenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_screenActionPerformed
+    private void txt_mainScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_mainScreenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_screenActionPerformed
+    }//GEN-LAST:event_txt_mainScreenActionPerformed
 
     private void btn_multiplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_multiplicationActionPerformed
         performOperation(btn_multiplication);
@@ -567,6 +560,7 @@ public final class Calculator extends javax.swing.JFrame {
 
     private void btn_subtractionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_subtractionActionPerformed
         performOperation(btn_subtraction);
+        btn_subtraction.setEnabled(false);
     }//GEN-LAST:event_btn_subtractionActionPerformed
 
     private void btn_9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_9ActionPerformed
@@ -582,15 +576,17 @@ public final class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_6ActionPerformed
 
     private void btn_equalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_equalActionPerformed
-
         showResult();
 
-        if (equalPressed) {
+        if (equalClicked) {
             if (equalResult != null) {
 
-                txt_secondScreen.setText(formatter.format(equalResult)
+                txt_secondScreen.setText(secondScreenFormatter.format(equalResult)
+                        + " "
                         + operator
-                        + formatter.format(operands[1])
+                        + " "
+                        + secondScreenFormatter.format(operands[1])
+                        + " "
                         + btn_equal.getText());
 
             }
@@ -599,14 +595,16 @@ public final class Calculator extends javax.swing.JFrame {
             if (!txt_secondScreen.getText().contains("=")) {
 
                 txt_secondScreen.setText(txt_secondScreen.getText()
+                        + " "
                         + btn_equal.getText());
 
             }
         }
 
         equalResult = operands[0];
+        overwriteSecondScreen = true;
 
-        equalPressed = true;
+        equalClicked = true;
     }//GEN-LAST:event_btn_equalActionPerformed
 
     private void btn_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_3ActionPerformed
@@ -618,28 +616,38 @@ public final class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_7ActionPerformed
 
     private void btn_commaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_commaActionPerformed
-        if (!txt_screen.getText().contains(",") && !overwrite) {
-            txt_screen.setText(txt_screen.getText() + btn_comma.getText());
+        if (!txt_mainScreen.getText().contains(",") && !overwriteMainScreen) {
+            txt_mainScreen.setText(txt_mainScreen.getText() + btn_comma.getText());
+
+            txt_secondScreen.setText(txt_secondScreen.getText()
+                    + btn_comma.getText());
         }
     }//GEN-LAST:event_btn_commaActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         if (btn_equal.isEnabled()) {
-            enableButtons(false);
+            enableSymbolButtons(false);
+        }
+
+        if (!btn_0.isEnabled()) {
+            enableNumberButtons(true);
         }
 
         for (int i = 0; i < operands.length; i++) {
             operands[i] = null;
         }
 
-        txt_screen.setText("0");
+        txt_mainScreen.setText("0");
         txt_secondScreen.setText("");
         operator = null;
-        equalPressed = false;
+        equalClicked = false;
         firstTime = true;
         indeterminacy = false;
         divisionBy0 = false;
-        overwrite = true;
+        overwriteMainScreen = true;
+        btn_subtraction.setEnabled(true);
+        equalResult = null;
+        result = null;
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_8ActionPerformed
@@ -705,18 +713,50 @@ public final class Calculator extends javax.swing.JFrame {
         initialClick = evt.getPoint();
     }//GEN-LAST:event_pnl_TitleBarMousePressed
 
+    public void configureWindow() {
+        setLocationRelativeTo(null);
+        fillSymbolButtonsList();
+        fillNumberButtonsList();
+        enableSymbolButtons(false);
+        btn_subtraction.setEnabled(true);
+
+        setIconImage(Toolkit.getDefaultToolkit()
+                .getImage("src/main/java/com/desarrollo/images/icon.png"));
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                setShape(new RoundRectangle2D.Double(
+                        0, 0, getWidth(), getHeight(), 20, 20));
+            }
+        });
+    }
+
     /**
      * Method that fills the lockable buttons list.
      */
-    public void fillLockableButtonsList() {
-        lockableButtons.add(btn_sum);
-        lockableButtons.add(btn_subtraction);
-        lockableButtons.add(btn_multiplication);
-        lockableButtons.add(btn_division);
-        lockableButtons.add(btn_pow);
-        lockableButtons.add(btn_sqrt);
-        lockableButtons.add(btn_comma);
-        lockableButtons.add(btn_equal);
+    public void fillSymbolButtonsList() {
+        symbolButtons.add(btn_sum);
+        symbolButtons.add(btn_subtraction);
+        symbolButtons.add(btn_multiplication);
+        symbolButtons.add(btn_division);
+        symbolButtons.add(btn_pow);
+        symbolButtons.add(btn_sqrt);
+        symbolButtons.add(btn_comma);
+        symbolButtons.add(btn_equal);
+    }
+
+    public void fillNumberButtonsList() {
+        numberButtons.add(btn_0);
+        numberButtons.add(btn_1);
+        numberButtons.add(btn_2);
+        numberButtons.add(btn_3);
+        numberButtons.add(btn_4);
+        numberButtons.add(btn_5);
+        numberButtons.add(btn_6);
+        numberButtons.add(btn_7);
+        numberButtons.add(btn_8);
+        numberButtons.add(btn_9);
     }
 
     /**
@@ -724,8 +764,14 @@ public final class Calculator extends javax.swing.JFrame {
      *
      * @param enable Set true for enable the buttons.
      */
-    public void enableButtons(boolean enable) {
-        lockableButtons.forEach(button -> {
+    public void enableSymbolButtons(boolean enable) {
+        symbolButtons.forEach(button -> {
+            button.setEnabled(enable);
+        });
+    }
+
+    public void enableNumberButtons(boolean enable) {
+        numberButtons.forEach(button -> {
             button.setEnabled(enable);
         });
     }
@@ -740,9 +786,9 @@ public final class Calculator extends javax.swing.JFrame {
         String aux = number + "";
 
         if (aux.endsWith(".0")) {
-            return formatter.format((int) number);
+            return mainScreenFormatter.format((int) number);
         } else {
-            return formatter.format(number);
+            return mainScreenFormatter.format(number);
         }
     }
 
@@ -754,41 +800,46 @@ public final class Calculator extends javax.swing.JFrame {
     public void writeOnScreen(JButton button) {
         double screenNumber;
 
-        txt_secondScreen.setText(txt_secondScreen.getText() + button.getText());
+        if (overwriteSecondScreen) {
+            txt_secondScreen.setText(button.getText());
+            overwriteSecondScreen = false;
+        } else {
+            txt_secondScreen.setText(txt_secondScreen.getText() + button.getText());
+        }
 
         try {
-            if (overwrite) {
-                screenNumber = formatter.parse(button.getText())
+            if (overwriteMainScreen) {
+                screenNumber = mainScreenFormatter.parse(button.getText())
                         .doubleValue();
 
-                if (equalPressed) {
+                if (equalClicked) {
                     for (int i = 0; i < operands.length; i++) {
                         operands[i] = null;
                     }
-                    equalPressed = false;
+                    equalClicked = false;
                 }
 
-                txt_screen.setText(formatter.format(screenNumber));
-                overwrite = false;
+                txt_mainScreen.setText(mainScreenFormatter.format(screenNumber));
+                overwriteMainScreen = false;
             } else {
-                if (txt_screen.getText().contains(",")) {
-                    txt_screen.setText(txt_screen.getText() + button.getText());
+                if (txt_mainScreen.getText().contains(",")) {
+                    txt_mainScreen.setText(txt_mainScreen.getText() + button.getText());
                 } else {
-                    screenNumber = formatter.parse(txt_screen.getText()
+                    screenNumber = mainScreenFormatter.parse(txt_mainScreen.getText()
                             + button.getText()).doubleValue();
-                    txt_screen.setText(formatter.format(screenNumber));
+                    txt_mainScreen.setText(mainScreenFormatter.format(screenNumber));
                 }
             }
 
             if (!btn_equal.isEnabled()) {
-                lockableButtons.forEach(b -> {
+                symbolButtons.forEach(b -> {
                     b.setEnabled(true);
                 });
             }
 
         } catch (ParseException ex) {
-            txt_screen.setText("Error");
-            overwrite = true;
+            txt_mainScreen.setText("Error");
+            overwriteMainScreen = true;
         }
 
     }
@@ -800,10 +851,12 @@ public final class Calculator extends javax.swing.JFrame {
 
         if (operands[1] == null) {
             try {
-                operands[1] = formatter.parse(txt_screen.getText()).doubleValue();
+                operands[1] = mainScreenFormatter.parse(txt_mainScreen.getText())
+                        .doubleValue();
+
             } catch (ParseException ex) {
-                txt_screen.setText("Error");
-                overwrite = true;
+                txt_mainScreen.setText("Error");
+                overwriteMainScreen = true;
             }
         }
 
@@ -827,28 +880,42 @@ public final class Calculator extends javax.swing.JFrame {
             }
 
             if (indeterminacy) {
-                txt_screen.setText("Indeterminación");
+                txt_mainScreen.setText("Indeterminación");
 
                 for (int i = 0; i < operands.length; i++) {
                     operands[i] = null;
                 }
 
-                enableButtons(false);
+                enableSymbolButtons(false);
+                enableNumberButtons(false);
                 indeterminacy = false;
+                overwriteSecondScreen = true;
             } else if (divisionBy0) {
-                txt_screen.setText("No existe división para 0");
+                txt_mainScreen.setText("No existe división para 0");
 
                 for (int i = 0; i < operands.length; i++) {
                     operands[i] = null;
                 }
 
-                enableButtons(false);
+                enableSymbolButtons(false);
+                enableNumberButtons(false);
                 divisionBy0 = false;
+                overwriteSecondScreen = true;
             } else {
-                txt_screen.setText(formatNumber(result));
+                txt_mainScreen.setText(formatNumber(result));
                 operands[0] = result;
             }
-            overwrite = true;
+
+            overwriteMainScreen = true;
+        } else {
+            try {
+                result = mainScreenFormatter.parse(txt_mainScreen.getText())
+                        .doubleValue();
+
+            } catch (ParseException ex) {
+                txt_mainScreen.setText("Error");
+                overwriteMainScreen = true;
+            }
         }
 
     }
@@ -860,35 +927,46 @@ public final class Calculator extends javax.swing.JFrame {
      */
     public void performOperation(JButton operatorButton) {
 
-        txt_secondScreen.setText(txt_secondScreen.getText()
-                + operatorButton.getText());
+        if (overwriteSecondScreen) {
+            if (result == null) {
+                txt_secondScreen.setText(operatorButton.getText());
+            } else {
+                txt_secondScreen.setText(secondScreenFormatter.format(result)
+                        + " " + operatorButton.getText() + " ");
+            }
+
+            overwriteSecondScreen = false;
+        } else {
+            txt_secondScreen.setText(txt_secondScreen.getText()
+                    + " " + operatorButton.getText() + " ");
+        }
 
         if (firstTime) {
             operator = operatorButton.getText();
             firstTime = false;
         }
 
-        if (equalPressed) {
+        if (equalClicked) {
             for (int i = 0; i < operands.length; i++) {
                 operands[i] = null;
             }
-            equalPressed = false;
+            equalClicked = false;
         }
 
-        lockableButtons.forEach(button -> {
+        symbolButtons.forEach(button -> {
             button.setEnabled(false);
         });
 
         try {
             if (operands[0] == null) {
-                operands[0] = formatter.parse(txt_screen.getText()).doubleValue();
-                overwrite = true;
+                operands[0] = mainScreenFormatter.parse(txt_mainScreen.getText()).doubleValue();
+                overwriteMainScreen = true;
             } else {
                 showResult();
             }
         } catch (ParseException ex) {
-            txt_screen.setText("Error");
-            overwrite = true;
+            txt_mainScreen.setText("Error");
+            overwriteMainScreen = true;
         }
 
         operands[1] = null;
@@ -900,20 +978,28 @@ public final class Calculator extends javax.swing.JFrame {
      */
     public void calculateSqrt() {
         try {
-            operands[0] = formatter.parse(txt_screen.getText()).doubleValue();
+            operands[0] = mainScreenFormatter.parse(txt_mainScreen.getText()).doubleValue();
+            txt_secondScreen.setText("√" + secondScreenFormatter.format(operands[0]));
         } catch (ParseException ex) {
-            txt_screen.setText("Error");
-            overwrite = true;
+            txt_mainScreen.setText("Error");
+            overwriteMainScreen = true;
         }
 
-        result = Math.sqrt(operands[0]);
-        txt_screen.setText(formatNumber(result));
+        if (operands[0] > 0) {
+            result = Math.sqrt(operands[0]);
+            txt_mainScreen.setText(formatNumber(result));
+        } else {
+            txt_mainScreen.setText("No existe raíz de un # -");
+            enableSymbolButtons(false);
+            enableNumberButtons(false);
+        }
 
         for (int i = 0; i < operands.length; i++) {
             operands[i] = null;
         }
 
-        overwrite = true;
+        overwriteMainScreen = true;
+        overwriteSecondScreen = true;
     }
 
     /**
@@ -974,7 +1060,7 @@ public final class Calculator extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel pnl_TitleBar;
-    private javax.swing.JTextField txt_screen;
+    private javax.swing.JTextField txt_mainScreen;
     private javax.swing.JTextField txt_secondScreen;
     // End of variables declaration//GEN-END:variables
 }
