@@ -616,8 +616,8 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="52" green="46" red="f" type="rgb"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="0" name="null"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new ImageIcon(&quot;src/main/java/com/desarrollo/images/button3.png&quot;)" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="0"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
