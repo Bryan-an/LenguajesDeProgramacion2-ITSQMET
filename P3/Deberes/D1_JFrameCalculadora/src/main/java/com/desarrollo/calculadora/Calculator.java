@@ -57,7 +57,6 @@ public final class Calculator extends javax.swing.JFrame {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
-        txt_screen = new javax.swing.JTextField();
         btn_division = new javax.swing.JButton();
         btn_multiplication = new javax.swing.JButton();
         btn_subtraction = new javax.swing.JButton();
@@ -80,6 +79,9 @@ public final class Calculator extends javax.swing.JFrame {
         pnl_TitleBar = new javax.swing.JPanel();
         btn_close = new javax.swing.JButton();
         btn_minimize = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        txt_screen = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculadora");
@@ -91,22 +93,6 @@ public final class Calculator extends javax.swing.JFrame {
         mainPanel.setMinimumSize(new java.awt.Dimension(350, 570));
         mainPanel.setPreferredSize(new java.awt.Dimension(350, 570));
         mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt_screen.setEditable(false);
-        txt_screen.setBackground(new java.awt.Color(244, 254, 255));
-        txt_screen.setFont(new java.awt.Font("Cambria Math", 1, 24)); // NOI18N
-        txt_screen.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txt_screen.setText("0");
-        txt_screen.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        txt_screen.setMaximumSize(new java.awt.Dimension(244, 48));
-        txt_screen.setMinimumSize(new java.awt.Dimension(244, 48));
-        txt_screen.setPreferredSize(new java.awt.Dimension(244, 48));
-        txt_screen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_screenActionPerformed(evt);
-            }
-        });
-        mainPanel.add(txt_screen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 350, 70));
 
         btn_division.setBackground(new java.awt.Color(234, 254, 255));
         btn_division.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -122,7 +108,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_divisionActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_division, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 60, 60));
+        mainPanel.add(btn_division, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 60, 60));
 
         btn_multiplication.setBackground(new java.awt.Color(234, 254, 255));
         btn_multiplication.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -138,7 +124,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_multiplicationActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_multiplication, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 60, 60));
+        mainPanel.add(btn_multiplication, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 60, 60));
 
         btn_subtraction.setBackground(new java.awt.Color(234, 254, 255));
         btn_subtraction.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -154,7 +140,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_subtractionActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_subtraction, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 60, 60));
+        mainPanel.add(btn_subtraction, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 60, 60));
 
         btn_clear.setBackground(new java.awt.Color(234, 254, 255));
         btn_clear.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -170,7 +156,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_clearActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 60, 60));
+        mainPanel.add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 60, 60));
 
         btn_7.setBackground(new java.awt.Color(234, 254, 255));
         btn_7.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -190,7 +176,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_7ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 60, 60));
+        mainPanel.add(btn_7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 60, 60));
 
         btn_8.setBackground(new java.awt.Color(234, 254, 255));
         btn_8.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -209,7 +195,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_8ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 60, 60));
+        mainPanel.add(btn_8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 60, 60));
 
         btn_9.setBackground(new java.awt.Color(234, 254, 255));
         btn_9.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -228,7 +214,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_9ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 60, 60));
+        mainPanel.add(btn_9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 60, 60));
 
         btn_sqrt.setBackground(new java.awt.Color(234, 254, 255));
         btn_sqrt.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -244,7 +230,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_sqrtActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_sqrt, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 60, 60));
+        mainPanel.add(btn_sqrt, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 60, 60));
 
         btn_4.setBackground(new java.awt.Color(234, 254, 255));
         btn_4.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -263,7 +249,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_4ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 60, 60));
+        mainPanel.add(btn_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 60, 60));
 
         btn_5.setBackground(new java.awt.Color(234, 254, 255));
         btn_5.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -282,7 +268,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_5ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 60, 60));
+        mainPanel.add(btn_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 60, 60));
 
         btn_6.setBackground(new java.awt.Color(234, 254, 255));
         btn_6.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -301,7 +287,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_6ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 60, 60));
+        mainPanel.add(btn_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 60, 60));
 
         btn_equal.setBackground(new java.awt.Color(234, 254, 255));
         btn_equal.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -317,7 +303,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_equalActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_equal, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 60, 60));
+        mainPanel.add(btn_equal, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 60, 60));
 
         btn_1.setBackground(new java.awt.Color(234, 254, 255));
         btn_1.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -336,7 +322,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_1ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 60, 60));
+        mainPanel.add(btn_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 60, 60));
 
         btn_2.setBackground(new java.awt.Color(234, 254, 255));
         btn_2.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -355,7 +341,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_2ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 60, 60));
+        mainPanel.add(btn_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 60, 60));
 
         btn_3.setBackground(new java.awt.Color(234, 254, 255));
         btn_3.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -374,7 +360,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_3ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 60, 60));
+        mainPanel.add(btn_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 60, 60));
 
         btn_0.setBackground(new java.awt.Color(234, 254, 255));
         btn_0.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -393,7 +379,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_0ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 60, 60));
+        mainPanel.add(btn_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 60, 60));
 
         btn_comma.setBackground(new java.awt.Color(234, 254, 255));
         btn_comma.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -412,7 +398,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_commaActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_comma, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 60, 60));
+        mainPanel.add(btn_comma, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, 60, 60));
 
         btn_sum.setBackground(new java.awt.Color(234, 254, 255));
         btn_sum.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -428,7 +414,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_sumActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_sum, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 60, 60));
+        mainPanel.add(btn_sum, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 60, 60));
 
         btn_pow.setBackground(new java.awt.Color(234, 254, 255));
         btn_pow.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
@@ -444,7 +430,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_powActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_pow, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 60, 60));
+        mainPanel.add(btn_pow, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 60, 60));
 
         pnl_TitleBar.setBackground(new java.awt.Color(221, 253, 255));
         pnl_TitleBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -506,6 +492,53 @@ public final class Calculator extends javax.swing.JFrame {
         );
 
         mainPanel.add(pnl_TitleBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 30));
+
+        jPanel1.setBackground(new java.awt.Color(244, 254, 255));
+
+        txt_screen.setEditable(false);
+        txt_screen.setBackground(new java.awt.Color(244, 254, 255));
+        txt_screen.setFont(new java.awt.Font("Cambria Math", 1, 24)); // NOI18N
+        txt_screen.setForeground(new java.awt.Color(35, 116, 140));
+        txt_screen.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_screen.setText("0");
+        txt_screen.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 15));
+        txt_screen.setMaximumSize(new java.awt.Dimension(244, 48));
+        txt_screen.setMinimumSize(new java.awt.Dimension(244, 48));
+        txt_screen.setPreferredSize(new java.awt.Dimension(244, 48));
+        txt_screen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_screenActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setBackground(new java.awt.Color(244, 254, 255));
+        jLabel1.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(139, 193, 209));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("test");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 15));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt_screen, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txt_screen, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        mainPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 350, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -905,6 +938,8 @@ public final class Calculator extends javax.swing.JFrame {
     private javax.swing.JButton btn_sqrt;
     private javax.swing.JButton btn_subtraction;
     private javax.swing.JButton btn_sum;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel pnl_TitleBar;
     private javax.swing.JTextField txt_screen;
