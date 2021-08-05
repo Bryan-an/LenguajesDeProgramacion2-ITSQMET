@@ -262,9 +262,9 @@ public final class Promedio extends javax.swing.JFrame {
             if (name.matches("(\\w|ñ)+")) {
                 if (lastname.matches("(\\w|ñ)+")) {
                     if (idNumber.matches("\\d{10}")) {
-                        if (txt_grade1.getText().matches("\\d+\\.*\\d{0,2}")
-                                && txt_grade2.getText().matches("\\d+\\.*\\d{0,2}")
-                                && txt_grade3.getText().matches("\\d+\\.*\\d{0,2}")) {
+                        if (txt_grade1.getText().matches("\\d+\\.?\\d{0,2}")
+                                && txt_grade2.getText().matches("\\d+\\.?\\d{0,2}")
+                                && txt_grade3.getText().matches("\\d+\\.?\\d{0,2}")) {
 
                             try {
                                 double grade1

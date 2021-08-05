@@ -243,7 +243,7 @@ public final class Relsb extends javax.swing.JFrame {
         double total = 0;
 
         try {
-            if (txt_price.getText().matches("\\d+\\.*\\d{0,2}")) {
+            if (txt_price.getText().matches("\\d+\\.?\\d{0,2}")) {
                 price = Double.parseDouble(txt_price.getText());
 
                 switch (brand) {
