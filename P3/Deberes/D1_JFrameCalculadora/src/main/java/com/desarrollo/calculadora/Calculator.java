@@ -30,6 +30,8 @@ public final class Calculator extends javax.swing.JFrame {
     private boolean indeterminacy = false;
     private boolean divisionBy0 = false;
 
+    private Double equalResult;
+
     /**
      * Creates new form Calculadora
      */
@@ -81,7 +83,7 @@ public final class Calculator extends javax.swing.JFrame {
         btn_minimize = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txt_screen = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        txt_secondScreen = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculadora");
@@ -497,7 +499,7 @@ public final class Calculator extends javax.swing.JFrame {
 
         txt_screen.setEditable(false);
         txt_screen.setBackground(new java.awt.Color(244, 254, 255));
-        txt_screen.setFont(new java.awt.Font("Cambria Math", 1, 24)); // NOI18N
+        txt_screen.setFont(new java.awt.Font("Cambria Math", 1, 28)); // NOI18N
         txt_screen.setForeground(new java.awt.Color(35, 116, 140));
         txt_screen.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txt_screen.setText("0");
@@ -511,28 +513,29 @@ public final class Calculator extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(244, 254, 255));
-        jLabel1.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(139, 193, 209));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("test");
-        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 15));
+        txt_secondScreen.setEditable(false);
+        txt_secondScreen.setBackground(new java.awt.Color(244, 254, 255));
+        txt_secondScreen.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        txt_secondScreen.setForeground(new java.awt.Color(139, 193, 209));
+        txt_secondScreen.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_secondScreen.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 15));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_screen, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_screen, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txt_secondScreen)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_secondScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txt_screen, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -579,7 +582,30 @@ public final class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_6ActionPerformed
 
     private void btn_equalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_equalActionPerformed
+
         showResult();
+
+        if (equalPressed) {
+            if (equalResult != null) {
+
+                txt_secondScreen.setText(formatter.format(equalResult)
+                        + operator
+                        + formatter.format(operands[1])
+                        + btn_equal.getText());
+
+            }
+
+        } else {
+            if (!txt_secondScreen.getText().contains("=")) {
+
+                txt_secondScreen.setText(txt_secondScreen.getText()
+                        + btn_equal.getText());
+
+            }
+        }
+
+        equalResult = operands[0];
+
         equalPressed = true;
     }//GEN-LAST:event_btn_equalActionPerformed
 
@@ -607,6 +633,7 @@ public final class Calculator extends javax.swing.JFrame {
         }
 
         txt_screen.setText("0");
+        txt_secondScreen.setText("");
         operator = null;
         equalPressed = false;
         firstTime = true;
@@ -725,7 +752,10 @@ public final class Calculator extends javax.swing.JFrame {
      * @param button The number button.
      */
     public void writeOnScreen(JButton button) {
-        double screenNumber = 0;
+        double screenNumber;
+
+        txt_secondScreen.setText(txt_secondScreen.getText() + button.getText());
+
         try {
             if (overwrite) {
                 screenNumber = formatter.parse(button.getText())
@@ -829,6 +859,9 @@ public final class Calculator extends javax.swing.JFrame {
      * @param operatorButton The operator button.
      */
     public void performOperation(JButton operatorButton) {
+
+        txt_secondScreen.setText(txt_secondScreen.getText()
+                + operatorButton.getText());
 
         if (firstTime) {
             operator = operatorButton.getText();
@@ -938,10 +971,10 @@ public final class Calculator extends javax.swing.JFrame {
     private javax.swing.JButton btn_sqrt;
     private javax.swing.JButton btn_subtraction;
     private javax.swing.JButton btn_sum;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel pnl_TitleBar;
     private javax.swing.JTextField txt_screen;
+    private javax.swing.JTextField txt_secondScreen;
     // End of variables declaration//GEN-END:variables
 }
