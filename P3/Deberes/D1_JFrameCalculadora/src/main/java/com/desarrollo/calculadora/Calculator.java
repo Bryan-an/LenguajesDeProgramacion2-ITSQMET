@@ -74,7 +74,7 @@ public final class Calculator extends javax.swing.JFrame {
         pnl_TitleBar = new javax.swing.JPanel();
         btn_close = new javax.swing.JButton();
         btn_minimize = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        pnl_screen = new javax.swing.JPanel();
         txt_mainScreen = new javax.swing.JTextField();
         txt_secondScreen = new javax.swing.JTextField();
 
@@ -457,6 +457,7 @@ public final class Calculator extends javax.swing.JFrame {
                 pnl_TitleBarMousePressed(evt);
             }
         });
+        pnl_TitleBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_close.setFont(new java.awt.Font("Arial Black", 1, 30)); // NOI18N
         btn_close.setForeground(new java.awt.Color(255, 149, 5));
@@ -472,6 +473,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_closeActionPerformed(evt);
             }
         });
+        pnl_TitleBar.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 15, 15));
 
         btn_minimize.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/minimize.png"));
         btn_minimize.setBorder(null);
@@ -485,31 +487,12 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_minimizeActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout pnl_TitleBarLayout = new javax.swing.GroupLayout(pnl_TitleBar);
-        pnl_TitleBar.setLayout(pnl_TitleBarLayout);
-        pnl_TitleBarLayout.setHorizontalGroup(
-            pnl_TitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_TitleBarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(298, Short.MAX_VALUE))
-        );
-        pnl_TitleBarLayout.setVerticalGroup(
-            pnl_TitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_TitleBarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_TitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
+        pnl_TitleBar.add(btn_minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 6, 15, 15));
 
         mainPanel.add(pnl_TitleBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 30));
 
-        jPanel1.setBackground(new java.awt.Color(244, 254, 255));
+        pnl_screen.setBackground(new java.awt.Color(244, 254, 255));
+        pnl_screen.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_mainScreen.setEditable(false);
         txt_mainScreen.setBackground(new java.awt.Color(244, 254, 255));
@@ -526,6 +509,7 @@ public final class Calculator extends javax.swing.JFrame {
                 txt_mainScreenActionPerformed(evt);
             }
         });
+        pnl_screen.add(txt_mainScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 46, 344, -1));
 
         txt_secondScreen.setEditable(false);
         txt_secondScreen.setBackground(new java.awt.Color(244, 254, 255));
@@ -533,29 +517,9 @@ public final class Calculator extends javax.swing.JFrame {
         txt_secondScreen.setForeground(new java.awt.Color(139, 193, 209));
         txt_secondScreen.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txt_secondScreen.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 15));
+        pnl_screen.add(txt_secondScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 338, 40));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_mainScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txt_secondScreen)
-                        .addContainerGap())))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(txt_secondScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txt_mainScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        mainPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 350, 90));
+        mainPanel.add(pnl_screen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 350, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1089,9 +1053,9 @@ public final class Calculator extends javax.swing.JFrame {
     private javax.swing.JButton btn_sqrt;
     private javax.swing.JButton btn_subtraction;
     private javax.swing.JButton btn_sum;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel pnl_TitleBar;
+    private javax.swing.JPanel pnl_screen;
     private javax.swing.JTextField txt_mainScreen;
     private javax.swing.JTextField txt_secondScreen;
     // End of variables declaration//GEN-END:variables
