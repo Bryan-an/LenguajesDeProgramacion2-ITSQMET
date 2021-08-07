@@ -93,7 +93,8 @@ public final class Calculator extends javax.swing.JFrame {
         btn_division.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_division.setForeground(new java.awt.Color(15, 70, 82));
         btn_division.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button.png"));
-        btn_division.setText("/");
+        btn_division.setText("÷");
+        btn_division.setBorderPainted(false);
         btn_division.setContentAreaFilled(false);
         btn_division.setFocusPainted(false);
         btn_division.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -103,13 +104,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_divisionActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_division, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 60, 60));
+        mainPanel.add(btn_division, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 60, 60));
 
         btn_multiplication.setBackground(new java.awt.Color(234, 254, 255));
         btn_multiplication.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_multiplication.setForeground(new java.awt.Color(15, 70, 82));
         btn_multiplication.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button.png"));
-        btn_multiplication.setText("*");
+        btn_multiplication.setText("X");
+        btn_multiplication.setBorderPainted(false);
         btn_multiplication.setContentAreaFilled(false);
         btn_multiplication.setFocusPainted(false);
         btn_multiplication.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -119,13 +121,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_multiplicationActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_multiplication, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 60, 60));
+        mainPanel.add(btn_multiplication, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 60, 60));
 
         btn_subtraction.setBackground(new java.awt.Color(234, 254, 255));
         btn_subtraction.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_subtraction.setForeground(new java.awt.Color(15, 70, 82));
         btn_subtraction.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button.png"));
         btn_subtraction.setText("-");
+        btn_subtraction.setBorderPainted(false);
         btn_subtraction.setContentAreaFilled(false);
         btn_subtraction.setFocusPainted(false);
         btn_subtraction.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -135,13 +138,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_subtractionActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_subtraction, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 60, 60));
+        mainPanel.add(btn_subtraction, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 60, 60));
 
         btn_clear.setBackground(new java.awt.Color(234, 254, 255));
         btn_clear.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_clear.setForeground(new java.awt.Color(15, 70, 82));
         btn_clear.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/buttonAC.png"));
         btn_clear.setText("AC");
+        btn_clear.setBorderPainted(false);
         btn_clear.setContentAreaFilled(false);
         btn_clear.setFocusPainted(false);
         btn_clear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -151,13 +155,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_clearActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 60, 60));
+        mainPanel.add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 60, 60));
 
         btn_7.setBackground(new java.awt.Color(234, 254, 255));
         btn_7.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_7.setForeground(new java.awt.Color(15, 70, 82));
         btn_7.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
         btn_7.setText("7");
+        btn_7.setBorderPainted(false);
         btn_7.setContentAreaFilled(false);
         btn_7.setFocusPainted(false);
         btn_7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -171,13 +176,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_7ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 60, 60));
+        mainPanel.add(btn_7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 60, 60));
 
         btn_8.setBackground(new java.awt.Color(234, 254, 255));
         btn_8.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_8.setForeground(new java.awt.Color(15, 70, 82));
         btn_8.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
         btn_8.setText("8");
+        btn_8.setBorderPainted(false);
         btn_8.setContentAreaFilled(false);
         btn_8.setFocusPainted(false);
         btn_8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -190,13 +196,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_8ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 60, 60));
+        mainPanel.add(btn_8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 60, 60));
 
         btn_9.setBackground(new java.awt.Color(234, 254, 255));
         btn_9.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_9.setForeground(new java.awt.Color(15, 70, 82));
         btn_9.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
         btn_9.setText("9");
+        btn_9.setBorderPainted(false);
         btn_9.setContentAreaFilled(false);
         btn_9.setFocusPainted(false);
         btn_9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -209,13 +216,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_9ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 60, 60));
+        mainPanel.add(btn_9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 60, 60));
 
         btn_sqrt.setBackground(new java.awt.Color(234, 254, 255));
         btn_sqrt.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_sqrt.setForeground(new java.awt.Color(15, 70, 82));
         btn_sqrt.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button.png"));
         btn_sqrt.setText("√ ");
+        btn_sqrt.setBorderPainted(false);
         btn_sqrt.setContentAreaFilled(false);
         btn_sqrt.setFocusPainted(false);
         btn_sqrt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -225,13 +233,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_sqrtActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_sqrt, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 60, 60));
+        mainPanel.add(btn_sqrt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 60, 60));
 
         btn_4.setBackground(new java.awt.Color(234, 254, 255));
         btn_4.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_4.setForeground(new java.awt.Color(15, 70, 82));
         btn_4.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
         btn_4.setText("4");
+        btn_4.setBorderPainted(false);
         btn_4.setContentAreaFilled(false);
         btn_4.setFocusPainted(false);
         btn_4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -244,13 +253,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_4ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 60, 60));
+        mainPanel.add(btn_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 60, 60));
 
         btn_5.setBackground(new java.awt.Color(234, 254, 255));
         btn_5.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_5.setForeground(new java.awt.Color(15, 70, 82));
         btn_5.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
         btn_5.setText("5");
+        btn_5.setBorderPainted(false);
         btn_5.setContentAreaFilled(false);
         btn_5.setFocusPainted(false);
         btn_5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -263,13 +273,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_5ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 60, 60));
+        mainPanel.add(btn_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 60, 60));
 
         btn_6.setBackground(new java.awt.Color(234, 254, 255));
         btn_6.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_6.setForeground(new java.awt.Color(15, 70, 82));
         btn_6.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
         btn_6.setText("6");
+        btn_6.setBorderPainted(false);
         btn_6.setContentAreaFilled(false);
         btn_6.setFocusPainted(false);
         btn_6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -282,13 +293,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_6ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 60, 60));
+        mainPanel.add(btn_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 60, 60));
 
         btn_equal.setBackground(new java.awt.Color(234, 254, 255));
         btn_equal.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_equal.setForeground(new java.awt.Color(15, 70, 82));
         btn_equal.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button.png"));
         btn_equal.setText("=");
+        btn_equal.setBorderPainted(false);
         btn_equal.setContentAreaFilled(false);
         btn_equal.setFocusPainted(false);
         btn_equal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -298,13 +310,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_equalActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_equal, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 60, 60));
+        mainPanel.add(btn_equal, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, 60, 60));
 
         btn_1.setBackground(new java.awt.Color(234, 254, 255));
         btn_1.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_1.setForeground(new java.awt.Color(15, 70, 82));
         btn_1.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
         btn_1.setText("1");
+        btn_1.setBorderPainted(false);
         btn_1.setContentAreaFilled(false);
         btn_1.setFocusPainted(false);
         btn_1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -317,13 +330,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_1ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 60, 60));
+        mainPanel.add(btn_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 60, 60));
 
         btn_2.setBackground(new java.awt.Color(234, 254, 255));
         btn_2.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_2.setForeground(new java.awt.Color(15, 70, 82));
         btn_2.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
         btn_2.setText("2");
+        btn_2.setBorderPainted(false);
         btn_2.setContentAreaFilled(false);
         btn_2.setFocusPainted(false);
         btn_2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -336,13 +350,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_2ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 60, 60));
+        mainPanel.add(btn_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 60, 60));
 
         btn_3.setBackground(new java.awt.Color(234, 254, 255));
         btn_3.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_3.setForeground(new java.awt.Color(15, 70, 82));
         btn_3.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
         btn_3.setText("3");
+        btn_3.setBorderPainted(false);
         btn_3.setContentAreaFilled(false);
         btn_3.setFocusPainted(false);
         btn_3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -355,13 +370,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_3ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 60, 60));
+        mainPanel.add(btn_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 60, 60));
 
         btn_0.setBackground(new java.awt.Color(234, 254, 255));
         btn_0.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_0.setForeground(new java.awt.Color(15, 70, 82));
         btn_0.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
         btn_0.setText("0");
+        btn_0.setBorderPainted(false);
         btn_0.setContentAreaFilled(false);
         btn_0.setFocusPainted(false);
         btn_0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -374,13 +390,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_0ActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 60, 60));
+        mainPanel.add(btn_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 60, 60));
 
         btn_comma.setBackground(new java.awt.Color(234, 254, 255));
         btn_comma.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_comma.setForeground(new java.awt.Color(15, 70, 82));
         btn_comma.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
         btn_comma.setText(",");
+        btn_comma.setBorderPainted(false);
         btn_comma.setContentAreaFilled(false);
         btn_comma.setFocusPainted(false);
         btn_comma.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -393,13 +410,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_commaActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_comma, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, 60, 60));
+        mainPanel.add(btn_comma, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 60, 60));
 
         btn_sum.setBackground(new java.awt.Color(234, 254, 255));
         btn_sum.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_sum.setForeground(new java.awt.Color(15, 70, 82));
         btn_sum.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button.png"));
         btn_sum.setText("+");
+        btn_sum.setBorderPainted(false);
         btn_sum.setContentAreaFilled(false);
         btn_sum.setFocusPainted(false);
         btn_sum.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -409,13 +427,14 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_sumActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_sum, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 60, 60));
+        mainPanel.add(btn_sum, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 60, 60));
 
         btn_pow.setBackground(new java.awt.Color(234, 254, 255));
         btn_pow.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         btn_pow.setForeground(new java.awt.Color(15, 70, 82));
         btn_pow.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button.png"));
         btn_pow.setText("^");
+        btn_pow.setBorderPainted(false);
         btn_pow.setContentAreaFilled(false);
         btn_pow.setFocusPainted(false);
         btn_pow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -425,7 +444,7 @@ public final class Calculator extends javax.swing.JFrame {
                 btn_powActionPerformed(evt);
             }
         });
-        mainPanel.add(btn_pow, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 60, 60));
+        mainPanel.add(btn_pow, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 60, 60));
 
         pnl_TitleBar.setBackground(new java.awt.Color(221, 253, 255));
         pnl_TitleBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -447,6 +466,7 @@ public final class Calculator extends javax.swing.JFrame {
         btn_close.setContentAreaFilled(false);
         btn_close.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_close.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btn_close.setRolloverIcon(new ImageIcon("src/main/java/com/desarrollo/images/closeRollover.png"));
         btn_close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_closeActionPerformed(evt);
@@ -459,6 +479,7 @@ public final class Calculator extends javax.swing.JFrame {
         btn_minimize.setContentAreaFilled(false);
         btn_minimize.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_minimize.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btn_minimize.setRolloverIcon(new ImageIcon("src/main/java/com/desarrollo/images/minimizeRollover.png"));
         btn_minimize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_minimizeActionPerformed(evt);
@@ -496,7 +517,7 @@ public final class Calculator extends javax.swing.JFrame {
         txt_mainScreen.setForeground(new java.awt.Color(35, 116, 140));
         txt_mainScreen.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txt_mainScreen.setText("0");
-        txt_mainScreen.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 15));
+        txt_mainScreen.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
         txt_mainScreen.setMaximumSize(new java.awt.Dimension(244, 48));
         txt_mainScreen.setMinimumSize(new java.awt.Dimension(244, 48));
         txt_mainScreen.setPreferredSize(new java.awt.Dimension(244, 48));
@@ -713,6 +734,9 @@ public final class Calculator extends javax.swing.JFrame {
         initialClick = evt.getPoint();
     }//GEN-LAST:event_pnl_TitleBarMousePressed
 
+    /**
+     * Method that configures the window (JFrame).
+     */
     public void configureWindow() {
         setLocationRelativeTo(null);
         fillSymbolButtonsList();
@@ -733,7 +757,7 @@ public final class Calculator extends javax.swing.JFrame {
     }
 
     /**
-     * Method that fills the lockable buttons list.
+     * Method that fills the symbol buttons list.
      */
     public void fillSymbolButtonsList() {
         symbolButtons.add(btn_sum);
@@ -746,6 +770,9 @@ public final class Calculator extends javax.swing.JFrame {
         symbolButtons.add(btn_equal);
     }
 
+    /**
+     * Method that fills the number buttons list.
+     */
     public void fillNumberButtonsList() {
         numberButtons.add(btn_0);
         numberButtons.add(btn_1);
@@ -760,7 +787,7 @@ public final class Calculator extends javax.swing.JFrame {
     }
 
     /**
-     * Method that enebles or disables the lockable buttons.
+     * Method that enebles or disables the symbol buttons.
      *
      * @param enable Set true for enable the buttons.
      */
@@ -770,6 +797,11 @@ public final class Calculator extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Method that enebles or disables the number buttons.
+     *
+     * @param enable Set true for enable the buttons.
+     */
     public void enableNumberButtons(boolean enable) {
         numberButtons.forEach(button -> {
             button.setEnabled(enable);
@@ -985,7 +1017,7 @@ public final class Calculator extends javax.swing.JFrame {
             overwriteMainScreen = true;
         }
 
-        if (operands[0] > 0) {
+        if (operands[0] >= 0) {
             result = Math.sqrt(operands[0]);
             txt_mainScreen.setText(formatNumber(result));
         } else {
@@ -1013,16 +1045,16 @@ public final class Calculator extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
         //</editor-fold>
 
