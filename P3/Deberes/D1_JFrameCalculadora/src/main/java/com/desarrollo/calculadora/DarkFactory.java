@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Calculadora - JFrame
  */
 package com.desarrollo.calculadora;
 
@@ -15,145 +13,214 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  */
 public class DarkFactory implements CalculatorFactory {
 
+    //Fields
     JButton button;
     JPanel panel;
+    JTextField textField;
 
+    //Methods
+    public JButton configureSymbolButton(JButton button) {
+        button.setFont(new Font("Cambria Math", 1, 18));
+        button.setForeground(new Color(38, 205, 220));
+        button.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/darkSymbolsButton.png"));
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
+        button.setRolloverIcon(new ImageIcon("src/main/java/com/desarrollo/images/darkOver.png"));
+
+        return button;
+    }
+
+    public JButton configureNumberButton(JButton button) {
+        button.setFont(new Font("Cambria Math", 1, 18));
+        button.setForeground(new Color(97, 176, 183));
+        button.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/darkNumbers.png"));
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
+        button.setRolloverIcon(new ImageIcon("src/main/java/com/desarrollo/images/darkOver.png"));
+
+        return button;
+    }
+
+    //Implemented methods
     @Override
     public JButton createButton0() {
         button = new JButton();
+        button.setText("0");
 
-        button.setText("s");
-
-        button.setBackground(new Color(234, 254, 45));
-
-        button.setFont(new Font("Cambria Math", 1, 18)); // NOI18N
-
-        button.setForeground(new Color(100, 70, 82));
-
-        return button;
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton1() {
         button = new JButton();
-
         button.setText("1");
 
-        button.setBackground(new Color(100, 5, 45));
-
-        button.setFont(new Font("Cambria Math", 1, 18)); // NOI18N
-
-        button.setForeground(new Color(78, 200, 40));
-
-        return button;
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton2() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        button = new JButton();
+        button.setText("2");
+
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton3() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        button = new JButton();
+        button.setText("3");
+
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton4() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        button = new JButton();
+        button.setText("4");
+
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton5() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        button = new JButton();
+        button.setText("5");
+
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton6() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        button = new JButton();
+        button.setText("6");
+
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton7() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        button = new JButton();
+        button.setText("7");
+
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton8() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        button = new JButton();
+        button.setText("8");
+
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton9() {
         button = new JButton();
-
         button.setText("9");
 
-        button.setBackground(new Color(234, 254, 45));
+        return configureNumberButton(button);
+    }
 
-        button.setFont(new Font("Cambria Math", 1, 18)); // NOI18N
+    @Override
+    public JButton createDivisionButton() {
+        button = new JButton();
+        button.setText("÷");
 
-        button.setForeground(new Color(100, 70, 82));
+        return configureSymbolButton(button);
+    }
+
+    @Override
+    public JButton createMultiplicationButton() {
+        button = new JButton();
+        button.setText("X");
+
+        return configureSymbolButton(button);
+    }
+
+    @Override
+    public JButton createSubtractionButton() {
+        button = new JButton();
+        button.setText("-");
+
+        return configureSymbolButton(button);
+    }
+
+    @Override
+    public JButton createSqrtButton() {
+        button = new JButton();
+        button.setText("√");
+
+        return configureSymbolButton(button);
+    }
+
+    @Override
+    public JButton createSumButton() {
+        button = new JButton();
+        button.setText("+");
+
+        return configureSymbolButton(button);
+    }
+
+    @Override
+    public JButton createPowButton() {
+        button = new JButton();
+        button.setText("^");
+
+        return configureSymbolButton(button);
+    }
+
+    @Override
+    public JButton createEqualButton() {
+        button = new JButton();
+        button.setText("=");
+
+        return configureSymbolButton(button);
+    }
+
+    @Override
+    public JButton createCommaButton() {
+        button = new JButton();
+        button.setText(",");
+
+        return configureNumberButton(button);
+    }
+
+    @Override
+    public JButton createClearButton() {
+        button = new JButton();
+        button.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/darkNumbers.png"));
+        button.setFont(new Font("Cambria Math", 1, 18));
+        button.setForeground(new Color(204, 98, 63));
+        button.setText("AC");
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        button.setRolloverIcon(new ImageIcon("src/main/java/com/desarrollo/images/buttonAC2.png"));
 
         return button;
     }
 
     @Override
-    public JButton createDivisionButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public JButton createMultiplicationButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public JButton createSubtractionButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public JButton createSqrtButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public JButton createSumButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public JButton createPowButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public JButton createEqualButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public JButton createCommaButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public JButton createClearButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public JButton createThemeButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        button = new JButton();
+        button.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/buttonDark-Light.png"));
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+
+        return button;
     }
 
     @Override
     public JPanel createMainPanel() {
         panel = new JPanel();
         panel.setBackground(new Color(0, 12, 13));
-        panel.setMinimumSize(new Dimension(350, 570));
-        panel.setPreferredSize(new Dimension(350, 570));
         panel.setLayout(new AbsoluteLayout());
 
         return panel;
@@ -161,22 +228,47 @@ public class DarkFactory implements CalculatorFactory {
 
     @Override
     public JPanel createTitleBarPanel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        panel = new JPanel();
+        panel.setBackground(new Color(0, 12, 13));
+        panel.setLayout(new AbsoluteLayout());
+
+        return panel;
     }
 
     @Override
     public JPanel createScreenPanel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        panel = new JPanel();
+        panel.setBackground(new Color(0, 27, 54));
+        panel.setLayout(new AbsoluteLayout());
+
+        return panel;
     }
 
     @Override
     public JTextField createMainScreen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        textField = new JTextField();
+        textField.setEditable(false);
+        textField.setBackground(new Color(0, 27, 54));
+        textField.setFont(new Font("Cambria Math", 1, 28));
+        textField.setForeground(new Color(242, 252, 255));
+        textField.setHorizontalAlignment(JTextField.RIGHT);
+        textField.setText("0");
+        textField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 15));
+
+        return textField;
     }
 
     @Override
     public JTextField createSecondScreen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        textField = new JTextField();
+        textField.setEditable(false);
+        textField.setBackground(new Color(0, 27, 54));
+        textField.setFont(new Font("Cambria Math", 1, 18));
+        textField.setForeground(new Color(216, 238, 245));
+        textField.setHorizontalAlignment(JTextField.RIGHT);
+        textField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 15));
+
+        return textField;
     }
 
 }

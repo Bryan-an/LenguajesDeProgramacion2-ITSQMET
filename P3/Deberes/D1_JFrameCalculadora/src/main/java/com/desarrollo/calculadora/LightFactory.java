@@ -5,6 +5,7 @@ package com.desarrollo.calculadora;
 
 import java.awt.*;
 import javax.swing.*;
+import org.netbeans.lib.awtextra.*;
 
 /**
  *
@@ -17,32 +18,30 @@ public class LightFactory implements CalculatorFactory {
     JPanel panel;
     JTextField textField;
 
-    public JButton configureSymbolsButton(JButton button) {
-        button.setBackground(new java.awt.Color(234, 254, 255));
-
-        button.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
-
-        button.setForeground(new java.awt.Color(15, 70, 82));
-
+    //Methods
+    public JButton configureSymbolButton(JButton button) {
+        button.setFont(new Font("Cambria Math", 1, 18)); // NOI18N
+        button.setForeground(new Color(15, 70, 82));
         button.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button.png"));
-
+        button.setBorderPainted(false);
         button.setContentAreaFilled(false);
-
         button.setFocusPainted(false);
-
-        button.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
         button.setRolloverIcon(new ImageIcon("src/main/java/com/desarrollo/images/button2.png"));
 
         return button;
     }
 
-    public JButton configureNumbersButton(JButton button) {
-        button.setBackground(new Color(234, 254, 255));
-
+    public JButton configureNumberButton(JButton button) {
         button.setFont(new Font("Cambria Math", 1, 18)); // NOI18N
-
         button.setForeground(new Color(15, 70, 82));
+        button.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
+        button.setPressedIcon(new ImageIcon("src/main/java/com/desarrollo/images/button3.png"));
+        button.setRolloverIcon(new ImageIcon("src/main/java/com/desarrollo/images/button2.png"));
 
         return button;
     }
@@ -51,204 +50,226 @@ public class LightFactory implements CalculatorFactory {
     @Override
     public JButton createButton0() {
         button = new JButton();
-
         button.setText("0");
 
-        return configureNumbersButton(button);
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton1() {
-        JButton button = new JButton();
-
+        button = new JButton();
         button.setText("1");
 
-        return configureNumbersButton(button);
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton2() {
         button = new JButton();
-
         button.setText("2");
 
-        return configureNumbersButton(button);
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton3() {
         button = new JButton();
-
         button.setText("3");
 
-        return configureNumbersButton(button);
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton4() {
         button = new JButton();
-
         button.setText("4");
 
-        return configureNumbersButton(button);
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton5() {
         button = new JButton();
-
         button.setText("5");
 
-        return configureNumbersButton(button);
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton6() {
         button = new JButton();
-
         button.setText("6");
 
-        return configureNumbersButton(button);
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton7() {
         button = new JButton();
-
         button.setText("7");
 
-        return configureNumbersButton(button);
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton8() {
         button = new JButton();
-
         button.setText("8");
 
-        return configureNumbersButton(button);
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createButton9() {
         button = new JButton();
-
         button.setText("9");
 
-        return configureNumbersButton(button);
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createDivisionButton() {
         button = new JButton();
-
         button.setText("÷");
 
-        return configureSymbolsButton(button);
+        return configureSymbolButton(button);
     }
 
     @Override
     public JButton createMultiplicationButton() {
         button = new JButton();
-
         button.setText("X");
 
-        return configureSymbolsButton(button);
+        return configureSymbolButton(button);
     }
 
     @Override
     public JButton createSubtractionButton() {
         button = new JButton();
-
         button.setText("-");
 
-        return configureSymbolsButton(button);
+        return configureSymbolButton(button);
     }
 
     @Override
     public JButton createSqrtButton() {
         button = new JButton();
-
         button.setText("√");
 
-        return configureSymbolsButton(button);
+        return configureSymbolButton(button);
     }
 
     @Override
     public JButton createSumButton() {
         button = new JButton();
-
         button.setText("+");
 
-        return configureSymbolsButton(button);
+        return configureSymbolButton(button);
     }
 
     @Override
     public JButton createPowButton() {
         button = new JButton();
-
         button.setText("^");
 
-        return configureSymbolsButton(button);
+        return configureSymbolButton(button);
     }
 
     @Override
     public JButton createEqualButton() {
         button = new JButton();
-
         button.setText("=");
 
-        return configureSymbolsButton(button);
+        return configureSymbolButton(button);
     }
 
     @Override
     public JButton createCommaButton() {
         button = new JButton();
-
         button.setText(",");
 
-        return configureNumbersButton(button);
+        return configureNumberButton(button);
     }
 
     @Override
     public JButton createClearButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        button = new JButton();
+        button.setFont(new Font("Cambria Math", 1, 18)); // NOI18N
+        button.setForeground(new Color(15, 70, 82));
+        button.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/buttonAC.png"));
+        button.setText("AC");
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
+        button.setRolloverIcon(new ImageIcon("src/main/java/com/desarrollo/images/buttonAC2.png"));
+
+        return button;
     }
 
     @Override
     public JButton createThemeButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        button = new JButton();
+        button.setIcon(new ImageIcon("src/main/java/com/desarrollo/images/buttonLight-Dark.png"));
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+
+        return button;
     }
 
     @Override
     public JPanel createMainPanel() {
         panel = new JPanel();
-        panel.setBackground(new java.awt.Color(221, 253, 255));
-        panel.setMinimumSize(new java.awt.Dimension(350, 570));
-        panel.setPreferredSize(new java.awt.Dimension(350, 570));
-        panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel.setBackground(new Color(221, 253, 255));
+        panel.setLayout(new AbsoluteLayout());
 
         return panel;
     }
 
     @Override
     public JPanel createTitleBarPanel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        panel = new JPanel();
+        panel.setBackground(new Color(221, 253, 255));
+        panel.setLayout(new AbsoluteLayout());
+
+        return panel;
     }
 
     @Override
     public JPanel createScreenPanel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        panel = new JPanel();
+        panel.setBackground(new Color(244, 254, 255));
+        panel.setLayout(new AbsoluteLayout());
+
+        return panel;
     }
 
     @Override
     public JTextField createMainScreen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        textField = new JTextField();
+        textField.setEditable(false);
+        textField.setBackground(new Color(244, 254, 255));
+        textField.setFont(new Font("Cambria Math", 1, 28));
+        textField.setForeground(new Color(35, 116, 140));
+        textField.setHorizontalAlignment(JTextField.RIGHT);
+        textField.setText("0");
+        textField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 15));
+
+        return textField;
     }
 
     @Override
     public JTextField createSecondScreen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        textField = new JTextField();
+        textField.setEditable(false);
+        textField.setBackground(new Color(244, 254, 255));
+        textField.setFont(new Font("Cambria Math", 1, 18));
+        textField.setForeground(new Color(139, 193, 209));
+        textField.setHorizontalAlignment(JTextField.RIGHT);
+        textField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 15));
+
+        return textField;
     }
 
 }
