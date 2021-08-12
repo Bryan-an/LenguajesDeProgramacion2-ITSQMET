@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * JFrame
  */
 package com.desarrollo.tiendaropa;
 
@@ -94,9 +92,19 @@ public final class TiendaRELSB extends javax.swing.JFrame {
         jCmbMarca.setSelectedIndex(0);
         bntGGenero.clearSelection(); //Limpiar los radioButtons seleccionados
         jCmbTalla.setSelectedIndex(0);
-        JTxtColor.setText("");
+        jTxtColor.setText("");
         jSCantidad.setValue(0);
         jTxtPrecio.setText("");
+    }
+
+    public void totalPagar() {
+        double totalPagar = 0;
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            totalPagar += Double.parseDouble(String.valueOf(model.getValueAt(i, 6)));
+        }
+
+        jLValorNeto.setText("$ " + totalPagar);
     }
 
     /**
@@ -133,7 +141,7 @@ public final class TiendaRELSB extends javax.swing.JFrame {
         jCmbTalla = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        JTxtColor = new javax.swing.JTextField();
+        jTxtColor = new javax.swing.JTextField();
         jSCantidad = new javax.swing.JSpinner();
         jLabel17 = new javax.swing.JLabel();
         jTxtPrecio = new javax.swing.JTextField();
@@ -313,7 +321,7 @@ public final class TiendaRELSB extends javax.swing.JFrame {
                                     .addComponent(jLabel16))
                                 .addGap(27, 27, 27)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JTxtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTxtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jSCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -348,7 +356,7 @@ public final class TiendaRELSB extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(JTxtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTxtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
@@ -380,6 +388,11 @@ public final class TiendaRELSB extends javax.swing.JFrame {
         jBtnValorNetoPagar.setBackground(new java.awt.Color(153, 102, 255));
         jBtnValorNetoPagar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jBtnValorNetoPagar.setText("VALOR NETO A PAGAR");
+        jBtnValorNetoPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnValorNetoPagarActionPerformed(evt);
+            }
+        });
 
         jTablaDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -409,6 +422,11 @@ public final class TiendaRELSB extends javax.swing.JFrame {
         jBtnFacturar.setBackground(new java.awt.Color(51, 204, 255));
         jBtnFacturar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jBtnFacturar.setText("FACTURAR");
+        jBtnFacturar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnFacturarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -509,6 +527,7 @@ public final class TiendaRELSB extends javax.swing.JFrame {
         }
 
         jLTotalPagar.setText("");
+        jLValorNeto.setText("");
     }//GEN-LAST:event_jBtnLimpiarActionPerformed
 
     private void jBtnGenerarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGenerarCompraActionPerformed
@@ -517,7 +536,7 @@ public final class TiendaRELSB extends javax.swing.JFrame {
         if (jCmbMarca.getSelectedIndex() != 0
                 && (jRBtnHombre.isSelected() || jRBtnMujer.isSelected())
                 && jCmbTalla.getSelectedIndex() != 0
-                && !JTxtColor.getText().equals("")
+                && !jTxtColor.getText().equals("")
                 && !jTxtPrecio.getText().equals("")
                 && jSCantidad.getValue() != null) {
 
@@ -534,7 +553,7 @@ public final class TiendaRELSB extends javax.swing.JFrame {
                 jCmbMarca.getSelectedItem(),
                 genero,
                 jCmbTalla.getSelectedItem(),
-                JTxtColor.getText(),
+                jTxtColor.getText(),
                 jSCantidad.getValue(),
                 jTxtPrecio.getText(),
                 jLTotalPagar.getText()
@@ -549,10 +568,25 @@ public final class TiendaRELSB extends javax.swing.JFrame {
     private void jBtnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnQuitarActionPerformed
         if (jTablaDetalle.getSelectedRow() >= 0) {
             model.removeRow(jTablaDetalle.getSelectedRow());
+
+            if (!jLValorNeto.getText().isEmpty()) {
+                totalPagar();
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Seleccionar la compra");
         }
     }//GEN-LAST:event_jBtnQuitarActionPerformed
+
+    private void jBtnValorNetoPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnValorNetoPagarActionPerformed
+        totalPagar();
+    }//GEN-LAST:event_jBtnValorNetoPagarActionPerformed
+
+    private void jBtnFacturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFacturarActionPerformed
+        Factura factura = new Factura();
+        factura.setVisible(true);
+        factura.mostrarFactura(jTablaDetalle, jLValorNeto.getText());
+        dispose();
+    }//GEN-LAST:event_jBtnFacturarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -588,7 +622,6 @@ public final class TiendaRELSB extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField JTxtColor;
     private javax.swing.ButtonGroup bntGGenero;
     private javax.swing.JButton jBtnFacturar;
     private javax.swing.JButton jBtnGenerarCompra;
@@ -629,6 +662,7 @@ public final class TiendaRELSB extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTablaDetalle;
+    private javax.swing.JTextField jTxtColor;
     private javax.swing.JTextField jTxtPrecio;
     // End of variables declaration//GEN-END:variables
 }
