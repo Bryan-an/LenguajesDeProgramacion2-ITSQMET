@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.desarrollo.registro;
+package com.desarrollo.login;
 
+import com.desarrollo.registro.Registro;
 import javax.swing.JFrame;
 
 /**
@@ -43,6 +44,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         jCBoxVerPass = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabelRegistro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -140,6 +142,17 @@ public class IniciarSesion extends javax.swing.JFrame {
         jButton2.setText("Iniciar");
         jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
 
+        jLabelRegistro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelRegistro.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelRegistro.setText("Nuevo Usuario? Crear una cuenta aquí.");
+        jLabelRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelRegistroMouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 340, -1));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -190,6 +203,12 @@ public class IniciarSesion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCBoxVerPassActionPerformed
 
+    private void jLabelRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegistroMouseClicked
+        Registro registro = new Registro();
+        registro.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jLabelRegistroMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -234,6 +253,7 @@ public class IniciarSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelRegistro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
