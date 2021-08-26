@@ -5,6 +5,8 @@
  */
 package com.desarrollo.registro;
 
+import com.desarrollo.componentesreutilizables.Imagen;
+import com.desarrollo.componentesreutilizables.VerificarDatos;
 import com.desarrollo.datos.Conexion;
 import com.desarrollo.login.IniciarSesion;
 import java.awt.Image;
@@ -17,7 +19,6 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -26,7 +27,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Registro extends javax.swing.JFrame {
 
     Conexion conexion = new Conexion();
-    String path;
+    String path = null;
+    VerificarDatos verificarDatos = new VerificarDatos();
 
     /**
      * Creates new form Registro
@@ -36,15 +38,47 @@ public class Registro extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    public ImageIcon redimensionarImagen(String imgPath) {
-        ImageIcon imagen = new ImageIcon(imgPath);
+    public boolean validarDatos() {
+        boolean bandera = true;
 
-        Image redimensionarImg = imagen.getImage()
-                .getScaledInstance(jLabelImagen.getWidth(), jLabelImagen.getHeight(), Image.SCALE_SMOOTH);
+        if (jTxtNombres.getText().equals("") || jTxtApellidos.getText().equals("")
+                || jTxtUsuario.getText().equals("")
+                || String.valueOf(jPassword.getPassword()).equals("")
+                || String.valueOf(jConfirmPassword.getPassword()).equals("")) {
 
-        ImageIcon imagenRedimensionada = new ImageIcon(redimensionarImg);
+            bandera = false;
+            JOptionPane.showMessageDialog(null, "Información incompleta");
+        } else if (!String.valueOf(jPassword.getPassword()).equals(String.valueOf(jConfirmPassword.getPassword()))) {
+            bandera = false;
+            JOptionPane.showMessageDialog(null, "No coinciden las contraseñas");
+        } else if (path == null) {
+            bandera = false;
+            JOptionPane.showMessageDialog(null, "Subir imagen");
+        }
 
-        return imagenRedimensionada;
+        return bandera;
+    }
+
+    public boolean usuarioExiste(String usuario) {
+        boolean bandera = false;
+
+        try {
+            Connection conn = conexion.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM usuarios WHERE usuario=?");
+            stmt.setString(1, usuario);
+
+            //Ejecutar query
+            //Objeto para SELECT
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                bandera = true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+
+        return bandera;
     }
 
     /**
@@ -66,7 +100,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTxtNombres = new javax.swing.JTextField();
         jPassword = new javax.swing.JPasswordField();
-        jBntCancelar = new javax.swing.JButton();
+        jBtnCancelar = new javax.swing.JButton();
         jBtnRegistrar = new javax.swing.JButton();
         jLabelIniciarSesion = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -125,11 +159,11 @@ public class Registro extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(JLMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -149,6 +183,11 @@ public class Registro extends javax.swing.JFrame {
         jTxtNombres.setBackground(new java.awt.Color(108, 122, 137));
         jTxtNombres.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTxtNombres.setForeground(new java.awt.Color(245, 215, 110));
+        jTxtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtNombresKeyTyped(evt);
+            }
+        });
         jPanel3.add(jTxtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 320, 37));
 
         jPassword.setBackground(new java.awt.Color(108, 122, 137));
@@ -156,10 +195,15 @@ public class Registro extends javax.swing.JFrame {
         jPassword.setForeground(new java.awt.Color(245, 215, 110));
         jPanel3.add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 320, 35));
 
-        jBntCancelar.setBackground(new java.awt.Color(240, 52, 52));
-        jBntCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jBntCancelar.setText("Cancelar");
-        jPanel3.add(jBntCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 540, -1, -1));
+        jBtnCancelar.setBackground(new java.awt.Color(240, 52, 52));
+        jBtnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 540, -1, -1));
 
         jBtnRegistrar.setBackground(new java.awt.Color(65, 131, 215));
         jBtnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -190,6 +234,11 @@ public class Registro extends javax.swing.JFrame {
         jTxtApellidos.setBackground(new java.awt.Color(108, 122, 137));
         jTxtApellidos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTxtApellidos.setForeground(new java.awt.Color(245, 215, 110));
+        jTxtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtApellidosKeyTyped(evt);
+            }
+        });
         jPanel3.add(jTxtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 320, 37));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -200,6 +249,11 @@ public class Registro extends javax.swing.JFrame {
         jTxtUsuario.setBackground(new java.awt.Color(108, 122, 137));
         jTxtUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTxtUsuario.setForeground(new java.awt.Color(245, 215, 110));
+        jTxtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtUsuarioKeyTyped(evt);
+            }
+        });
         jPanel3.add(jTxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 320, 37));
 
         jConfirmPassword.setBackground(new java.awt.Color(108, 122, 137));
@@ -237,7 +291,7 @@ public class Registro extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,63 +330,66 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelIniciarSesionMouseClicked
 
     private void jBntCargarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBntCargarImagenActionPerformed
-        JFileChooser file = new JFileChooser();
-        file.setCurrentDirectory(new File(System.getProperty("user.home")));
-
-        FileNameExtensionFilter fileFilter
-                = new FileNameExtensionFilter("*.Images", "jpg", "png", "gif");
-
-        file.addChoosableFileFilter(fileFilter);
-
-        //botón de selección
-        int fileState = file.showSaveDialog(null);
-
-        //si selecciona la imagen
-        if (fileState == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = file.getSelectedFile();
-            path = selectedFile.getAbsolutePath();
-
-            //mostrar imagen en el label
-//            jLabelImagen.setIcon(new ImageIcon(path));
-            jLabelImagen.setIcon(redimensionarImagen(path));
-
-        } else if (fileState == JFileChooser.CANCEL_OPTION) {
-            System.out.println("No se ha seleccionado ninguna imagen");
-        }
+        Imagen img = new Imagen();
+        path = img.cargarImagen(jLabelImagen);
     }//GEN-LAST:event_jBntCargarImagenActionPerformed
 
     private void jBtnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistrarActionPerformed
-        try {
-            //1. Establecer conexión
-            Connection conn = conexion.getConnection();
-            //2. Crear objeto para preparar queries -> PreparedStatement
-            PreparedStatement stmt = conn
-                    .prepareStatement("INSERT INTO usuarios (nombres, apellidos, usuario, contraseña, imagen) VALUES (?,?,?,?,?)");
+        if (validarDatos()) {  //Verificar que los datos estén correctos
 
-            stmt.setString(1, jTxtNombres.getText());
-            stmt.setString(2, jTxtApellidos.getText());
-            stmt.setString(3, jTxtUsuario.getText());
-            stmt.setString(4, String.valueOf(jPassword.getPassword()));
+            try {
+                //1. Establecer conexión
+                Connection conn = conexion.getConnection();
+                //2. Crear objeto para preparar queries -> PreparedStatement
+                PreparedStatement stmt = conn
+                        .prepareStatement("INSERT INTO usuarios (nombres, apellidos, usuario, contraseña, imagen) VALUES (?,?,?,SHA1(?),?)");
 
-            //capturar imagen en binario
-            InputStream img = new FileInputStream(new File(path));
-            stmt.setBlob(5, img);
+                stmt.setString(1, jTxtNombres.getText());
+                stmt.setString(2, jTxtApellidos.getText());
+                stmt.setString(3, jTxtUsuario.getText());
+                stmt.setString(4, String.valueOf(jPassword.getPassword()));
 
-            //ejecutar query
-            if (stmt.executeUpdate() != 0) { //devuelve un valor de tipo entero -> 0 si no se insertó -> distinto de 0 si se insertó
-                JOptionPane.showMessageDialog(null, "Registro con éxito");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al registrar");
+                //capturar imagen en binario
+                InputStream img = new FileInputStream(new File(path));
+                stmt.setBlob(5, img);
+
+                //lamar métood - verificar si existe usuario
+                if (usuarioExiste(jTxtUsuario.getText())) {
+                    JOptionPane.showMessageDialog(null, "Ya existe usuario");
+                    jTxtUsuario.setText("");
+                } else {
+                    //ejecutar query
+                    if (stmt.executeUpdate() != 0) { //devuelve un valor de tipo entero -> 0 si no se insertó -> distinto de 0 si se insertó
+                        JOptionPane.showMessageDialog(null, "Registro con éxito");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al registrar");
+                    }
+                }
+                //cerrar objetos de conexión
+                stmt.close();
+                conn.close();
+            } catch (SQLException | FileNotFoundException ex) {
+                ex.printStackTrace(System.out);
             }
 
-            //cerrar objetos de conexión
-            stmt.close();
-            conn.close();
-        } catch (SQLException | FileNotFoundException ex) {
-            ex.printStackTrace(System.out);
         }
-
     }//GEN-LAST:event_jBtnRegistrarActionPerformed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
+
+    private void jTxtNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombresKeyTyped
+        verificarDatos.validarLetras(evt);
+    }//GEN-LAST:event_jTxtNombresKeyTyped
+
+    private void jTxtApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtApellidosKeyTyped
+        verificarDatos.validarLetras(evt);
+    }//GEN-LAST:event_jTxtApellidosKeyTyped
+
+    private void jTxtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtUsuarioKeyTyped
+        verificarDatos.validarLetrasNumeros(evt);
+    }//GEN-LAST:event_jTxtUsuarioKeyTyped
 
     /**
      * @param args the command line arguments
@@ -367,8 +424,8 @@ public class Registro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLMinimizar;
-    private javax.swing.JButton jBntCancelar;
     private javax.swing.JButton jBntCargarImagen;
+    private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnRegistrar;
     private javax.swing.JPasswordField jConfirmPassword;
     private javax.swing.JLabel jLCerrar;

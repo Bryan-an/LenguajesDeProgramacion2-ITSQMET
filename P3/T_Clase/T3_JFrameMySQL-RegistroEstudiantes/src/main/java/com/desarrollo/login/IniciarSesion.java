@@ -5,14 +5,22 @@
  */
 package com.desarrollo.login;
 
+import com.desarrollo.componentesreutilizables.VerificarDatos;
+import com.desarrollo.datos.Conexion;
+import com.desarrollo.estudiantes.Estudiantes;
 import com.desarrollo.registro.Registro;
+import java.sql.*;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Bryan Andagoya
  */
 public class IniciarSesion extends javax.swing.JFrame {
+
+    Conexion conexion = new Conexion();
+    VerificarDatos verificarDatos = new VerificarDatos();
 
     /**
      * Creates new form IniciarSesion
@@ -42,8 +50,8 @@ public class IniciarSesion extends javax.swing.JFrame {
         jTxtUsuario = new javax.swing.JTextField();
         jPassword = new javax.swing.JPasswordField();
         jCBoxVerPass = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBtnCancelar = new javax.swing.JButton();
+        jBtnLogin = new javax.swing.JButton();
         jLabelRegistro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,6 +123,11 @@ public class IniciarSesion extends javax.swing.JFrame {
         jTxtUsuario.setBackground(new java.awt.Color(108, 122, 137));
         jTxtUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTxtUsuario.setForeground(new java.awt.Color(245, 215, 110));
+        jTxtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtUsuarioKeyTyped(evt);
+            }
+        });
         jPanel3.add(jTxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 240, 37));
 
         jPassword.setBackground(new java.awt.Color(108, 122, 137));
@@ -132,15 +145,25 @@ public class IniciarSesion extends javax.swing.JFrame {
         });
         jPanel3.add(jCBoxVerPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(240, 52, 52));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Cancelar");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
+        jBtnCancelar.setBackground(new java.awt.Color(240, 52, 52));
+        jBtnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(65, 131, 215));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Iniciar");
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
+        jBtnLogin.setBackground(new java.awt.Color(65, 131, 215));
+        jBtnLogin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jBtnLogin.setText("Iniciar");
+        jBtnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnLoginActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
 
         jLabelRegistro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelRegistro.setForeground(new java.awt.Color(255, 255, 255));
@@ -209,6 +232,43 @@ public class IniciarSesion extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabelRegistroMouseClicked
 
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
+
+    private void jBtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLoginActionPerformed
+        try {
+            Connection conn = conexion.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM usuarios WHERE usuario=? AND contraseña=SHA1(?)");
+            stmt.setString(1, jTxtUsuario.getText());
+            stmt.setString(2, String.valueOf(jPassword.getPassword()));
+
+            //Ejecutar query
+            //Objeto para SELECT
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                //JOptionPane.showMessageDialog(null, "Login exitoso");
+//               Registro registro = new Registro();
+                Estudiantes estudiantes = new Estudiantes();
+                estudiantes.setVisible(true);
+                dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+                jTxtUsuario.setText("");
+                jPassword.setText("");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+
+    }//GEN-LAST:event_jBtnLoginActionPerformed
+
+    private void jTxtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtUsuarioKeyTyped
+        verificarDatos.validarLetrasNumeros(evt);
+    }//GEN-LAST:event_jTxtUsuarioKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -246,8 +306,8 @@ public class IniciarSesion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLMinimizar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jBtnCancelar;
+    private javax.swing.JButton jBtnLogin;
     private javax.swing.JCheckBox jCBoxVerPass;
     private javax.swing.JLabel jLCerrar;
     private javax.swing.JLabel jLabel1;
