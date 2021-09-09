@@ -5,6 +5,7 @@
  */
 package com.desarrollo.login;
 
+import com.desarrollo.componentesreutilizables.Imagen;
 import com.desarrollo.componentesreutilizables.VerificarDatos;
 import com.desarrollo.datos.Conexion;
 import com.desarrollo.estudiantes.Estudiantes;
@@ -250,9 +251,18 @@ public class IniciarSesion extends javax.swing.JFrame {
             if (rs.next()) {
                 //JOptionPane.showMessageDialog(null, "Login exitoso");
 //               Registro registro = new Registro();
+                Estudiantes.idUsuarioAutentificado = rs.getInt("id_usuarios");
                 Estudiantes estudiantes = new Estudiantes();
                 estudiantes.setVisible(true);
                 dispose();
+
+                //colocar imagen almacenada desde la BDD
+                Imagen img = new Imagen();
+                estudiantes.jLImagenUsuario.setIcon(img.redimensionarImagen(null,
+                        rs.getBytes(6), estudiantes.jLImagenUsuario.getWidth(), estudiantes.jLImagenUsuario.getHeight()));
+
+                //colocar el usuario de la persona autentificada
+                estudiantes.jLUsuario.setText(rs.getString(4));
 
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
@@ -297,10 +307,8 @@ public class IniciarSesion extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new IniciarSesion().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new IniciarSesion().setVisible(true);
         });
     }
 

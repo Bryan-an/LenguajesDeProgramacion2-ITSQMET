@@ -16,10 +16,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Imagen {
 
-    public ImageIcon redimensionarImagen(String imgPath, int ancho, int alto) {
-        ImageIcon imagen = new ImageIcon(imgPath);
+    public ImageIcon redimensionarImagen(String imgPath, byte[] IMGBLOB, int ancho, int alto) {
+        ImageIcon myImg;
 
-        Image redimensionarImg = imagen.getImage()
+        if (imgPath != null) {
+            myImg = new ImageIcon(imgPath);
+        } else {
+            myImg = new ImageIcon(IMGBLOB);
+        }
+
+        Image redimensionarImg = myImg.getImage()
                 .getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
 
         ImageIcon imagenRedimensionada = new ImageIcon(redimensionarImg);
@@ -48,12 +54,13 @@ public class Imagen {
 
             //mostrar imagen en el label
 //            jLabelImagen.setIcon(new ImageIcon(path));
-            jLabelImagen.setIcon(redimensionarImagen(path, jLabelImagen.getWidth(), jLabelImagen.getHeight()));
+            jLabelImagen.setIcon(redimensionarImagen(path, null, 
+                    jLabelImagen.getWidth(), jLabelImagen.getHeight()));
 
         } else if (fileState == JFileChooser.CANCEL_OPTION) {
             System.out.println("No se ha seleccionado ninguna imagen");
         }
-        
+
         return path;
     }
 }
